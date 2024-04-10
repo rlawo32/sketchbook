@@ -1,10 +1,13 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+
+import Process1 from "./process/process1";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1>hello!</h1>
+      
+      <Process1 />
+
     </main>
   );
 }

@@ -93,34 +93,37 @@ const step1 = () => {
 
         let tmpCompare1:number = 0;
         let tmpCompare2:number = 0;
+        let chkIdx = 0;
         tmpIdx = 0;
+        
 
         // 팀별 합산으로 밸런스 조정 //
-        // for(let i=0; i<temp1DemList.length; i+=2) {
-		// 	if(tmpCompare1 > tmpCompare2) {
-		// 		for(let j=i+1; j>i-1; j--) {
-		// 			temp2DemList.push(temp1DemList[j]);	
-		// 		}
-		// 	} else {
-		// 		for(let j=i; j<i+2; j++) {
-		// 			temp2DemList.push(temp1DemList[j]);	
-		// 		}	
-		// 	}
+        for(let i=0; i<composition; i++) {
+	
+	    if(tmpCompare1 > tmpCompare2) {
+		for(let j=teamCount-1; j>=0; j--) {
+		    temp2DemList[j][i] = temp1DemList[tmpIdx++];
+		}
+	    } else {
+		for(let j=0; j<teamCount; j++) {
+		    temp2DemList[j][i] = temp1DemList[tmpIdx++];
+		}	
+	    }
 			
-		// 	tmpCompare1 = 0;
-		// 	tmpCompare2 = 0;
-		// 	tmpIdx = 1;
-		// 	for(let j=0; j<teamCount; j++) {
-		// 		for(let k=j; k<temp2DemList.length; k+=teamCount) {
-		// 			if(tmpIdx == 1) {
-		// 				tmpCompare1 += parseInt(temp2DemList[k].lv);
-		// 			} else {
-		// 				tmpCompare2 += parseInt(temp2DemList[k].lv);
-		// 			}
-		// 		}
-		// 		tmpIdx++;
-		// 	}
-		// }
+	    tmpCompare1 = 0;
+	    tmpCompare2 = 0;
+	    chkIdx = 0;
+	    for(let j=0; j<teamCount; j++) {
+		for(let k=0; k<i+1; k++) {
+			if(chkIdx == 0) {
+				tmpCompare1 += temp2DemList[j][k].lv;
+			} else {
+				tmpCompare2 += temp2DemList[j][k].lv;
+			}
+		}
+		chkIdx++;
+	    }
+	}
         // setTempDataList(temp2DemList);
     }
 

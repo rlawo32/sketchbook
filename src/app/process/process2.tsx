@@ -9,6 +9,7 @@ const step1 = () => {
     const [teamCount, setTeamCount] = useState<number>(0);
 
     const [tempDataList, setTempDataList] = useState<{id:number, lv:number, nm:string}[][]>([[]]);
+    const [checkDatas, setCheckDatas] = useState<{id:number, row:number, cell:number}[]>([]);
 
     const tempTest = ():void => {     
         const composition:number = Math.floor(personnel/teamCount);
@@ -41,6 +42,14 @@ const step1 = () => {
         setTempDataList(copyTempDataList);
     }
 
+    const onChangeCheckData = (checked:boolean, idx:number, row:number, cell:number):void => {
+        if(checked) {
+            setCheckDatas(prev => [...prev, {id:idx, row:row, cell:cell}]);
+        } else {
+            setCheckDatas(checkDatas.filter((el) => el.id !== idx));
+        }
+    }
+
     const onActiveselectBox = ():any[] => {
         const list:any[] = [];
         const textBox:string[] = ["E", "D", "C", "B", "A"];
@@ -54,20 +63,33 @@ const step1 = () => {
 
     const random = ():void => {
         const copyTempDataList:{id:number, lv:number, nm:string}[][] = JSON.parse(JSON.stringify(tempDataList));
-        for(let i=copyTempDataList.length-1; i>=0; i--) {
-            for(let j=copyTempDataList[i].length-1; j>=0; j--) {
-                let n = Math.floor(Math.random() * (i+1));
-                let m = Math.floor(Math.random() * (j+1));
-                [copyTempDataList[n][j], copyTempDataList[i][m]] = [copyTempDataList[i][m], copyTempDataList[n][j]];
+        let temp:{id:number, lv:number, nm:string}[][] = [[]];
+
+        if(checkDatas.length > 0) {
+            temp = JSON.parse(JSON.stringify(tempDataList));
+            for(let i=0; i<checkDatas.length; i++) {
+                copyTempDataList[0].filter((el) => el.id !== checkDatas[i].id);
             }
-	  	}
-        setTempDataList(copyTempDataList);
+            console.log(copyTempDataList);
+        }
+
+
+        // for(let i=copyTempDataList.length-1; i>=0; i--) {
+        //     for(let j=copyTempDataList[i].length-1; j>=0; j--) {
+        //         let n = Math.floor(Math.random() * (i+1));
+        //         let m = Math.floor(Math.random() * (j+1));
+        //         [copyTempDataList[n][j], copyTempDataList[i][m]] = [copyTempDataList[i][m], copyTempDataList[n][j]];
+        //     }
+	  	// }
+        // setTempDataList(copyTempDataList);
     }
 
     const balance = ():void => {
+        const composition:number = Math.floor(personnel/teamCount);
+
         const copyTempDataList:{id:number, lv:number, nm:string}[][] = JSON.parse(JSON.stringify(tempDataList));
         const temp1DemList:{id:number, lv:number, nm:string}[] = [];
-        const temp2DemList:{id:number, lv:number, nm:string}[][] = [[]];
+        const temp2DemList:{id:number, lv:number, nm:string}[][] = Array.from({length: teamCount}, () => Array.from({length: composition}));
         for(let i=0; i<copyTempDataList.length; i++) {
             for(let j=0; j<copyTempDataList[i].length; j++) {
                 temp1DemList.push(copyTempDataList[i][j]);
@@ -82,8 +104,6 @@ const step1 = () => {
         temp1DemList.sort((a, b) => {
 		    return b.lv - a.lv;
 		});
-
-        const composition:number = Math.floor(personnel/teamCount);
         let tmpIdx:number = 0;
         for(let i=0; i<composition; i++) {
             for(let j=0; j<teamCount; j++) {
@@ -100,36 +120,36 @@ const step1 = () => {
         // 팀별 합산으로 밸런스 조정 //
         for(let i=0; i<composition; i++) {
 	
-	    if(tmpCompare1 > tmpCompare2) {
-		for(let j=teamCount-1; j>=0; j--) {
-		    temp2DemList[j][i] = temp1DemList[tmpIdx++];
-		}
-	    } else {
-		for(let j=0; j<teamCount; j++) {
-		    temp2DemList[j][i] = temp1DemList[tmpIdx++];
-		}	
-	    }
-			
-	    tmpCompare1 = 0;
-	    tmpCompare2 = 0;
-	    chkIdx = 0;
-	    for(let j=0; j<teamCount; j++) {
-		for(let k=0; k<i+1; k++) {
-			if(chkIdx == 0) {
-				tmpCompare1 += temp2DemList[j][k].lv;
-			} else {
-				tmpCompare2 += temp2DemList[j][k].lv;
-			}
-		}
-		chkIdx++;
-	    }
-	}
-        // setTempDataList(temp2DemList);
+            if(tmpCompare1 > tmpCompare2) {
+                for(let j=teamCount-1; j>=0; j--) {
+                    temp2DemList[j][i] = temp1DemList[tmpIdx++];
+                }
+            } else {
+                for(let j=0; j<teamCount; j++) {
+                    temp2DemList[j][i] = temp1DemList[tmpIdx++];
+                }	
+            }
+                
+            tmpCompare1 = 0;
+            tmpCompare2 = 0;
+            chkIdx = 0;
+            for(let j=0; j<teamCount; j++) {
+                for(let k=0; k<i+1; k++) {
+                    if(chkIdx == 0) {
+                        tmpCompare1 += temp2DemList[j][k].lv;
+                    } else {
+                        tmpCompare2 += temp2DemList[j][k].lv;
+                    }
+                }
+                chkIdx++;
+            }
+        }
+        setTempDataList(temp2DemList);
     }
 
     useEffect(() => {
-        console.log(tempDataList);
-    }, [tempDataList])
+        console.log(checkDatas);
+    }, [checkDatas])
 
     return (
         <div>
@@ -147,6 +167,7 @@ const step1 = () => {
                                     {onActiveselectBox()}
                                 </select>
                                 <input type="text" id={"input_" + child.id} onChange={(e) => onChangeInputData(child.id, idx1, e.target.value)} value={child.nm} />
+                                <input type="checkbox" onChange={(e) => onChangeCheckData(e.target.checked, child.id, idx1, idx2)} />
                             </div>
                         ))}
                     </div>

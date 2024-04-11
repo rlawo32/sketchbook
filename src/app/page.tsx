@@ -1,12 +1,12 @@
 import styles from "./page.module.css";
 
-import Process1 from "./process/process1";
+import Process2 from "./process/process2";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       
-      <Process1 />
+      <Process2 />
 
     </main>
   );

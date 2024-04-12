@@ -13,9 +13,41 @@ const step1 = () => {
     const [checkDatas, setCheckDatas] = useState<{id:number, row:number, cell:number}[]>([]);
 
     const tempTest = ():void => {     
-        const composition:number = Math.floor(personnel/teamCount);
+        let realTeams:number = teamCount;
+        let realPlayers:number = personnel;
+        let realComposition:number = Math.floor(personnel/teamCount);
 
-        let tempList:{id:number, lv:number, nm:string}[][] = Array.from({length: teamCount}, () => Array.from({length: composition}));
+        let tempList:{id:number, lv:number, nm:string}[][] = Array.from({length: realTeams}, () => Array.from({length: realComposition}));
+
+        if(personnel % teamCount !== 0) { // 인원 홀수일 경우 대응
+            let testComposition:number = Math.floor(personnel/teamCount);
+            let players:number = personnel;
+            const teams:number = teamCount;
+            const arr:number[] = [];
+            let idx:number = 0;
+            
+            for(let i=1; i<=teams; i++) {
+				arr[idx++] = testComposition;
+				players -= testComposition;
+				if((teams - i) == 2 && players % 2 == 0) {
+					testComposition = players / 2;
+				} else if((teams - i) == 3 && players % 3 == 0) {
+					testComposition = players / 3;
+				} else if((teams - i) == 1) {
+					testComposition = players;
+				}
+			}
+
+            tempList = [];
+            tempList = Array.from({length: realTeams});
+
+            
+            for(let i=0; i<arr.length; i++) {
+                tempList[i] = Array.from({length: arr[i]});
+            }
+        }
+
+        
 
         for(let i=0; i<tempList.length; i++) {
             let plus:number = 1;

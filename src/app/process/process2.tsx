@@ -7,6 +7,7 @@ const step1 = () => {
     const [stepProcess, setStepProcess] = useState<number>(0);
     const [personnel, setPersonnel] = useState<number>(0);
     const [teamCount, setTeamCount] = useState<number>(0);
+    const [activeMatch, setActiveMatch] = useState<number>(1000);
 
     const [tempDataList, setTempDataList] = useState<{id:number, lv:number, nm:string}[][]>([[]]);
     const [checkDatas, setCheckDatas] = useState<{id:number, row:number, cell:number}[]>([]);
@@ -63,25 +64,44 @@ const step1 = () => {
 
     const random = ():void => {
         const copyTempDataList:{id:number, lv:number, nm:string}[][] = JSON.parse(JSON.stringify(tempDataList));
-        let temp:{id:number, lv:number, nm:string}[][] = [[]];
 
-        if(checkDatas.length > 0) {
-            temp = JSON.parse(JSON.stringify(tempDataList));
-            for(let i=0; i<checkDatas.length; i++) {
-                copyTempDataList[0].filter((el) => el.id !== checkDatas[i].id);
+
+        for(let i=copyTempDataList.length-1; i>=0; i--) { 
+            for(let j=copyTempDataList[i].length-1; j>=0; j--) {
+                let n = Math.floor(Math.random() * (i+1));
+                let m = Math.floor(Math.random() * (j+1));
+                [copyTempDataList[n][j], copyTempDataList[i][m]] = [copyTempDataList[i][m], copyTempDataList[n][j]];
             }
-            console.log(copyTempDataList);
+	  	}
+
+        /*****************
+        /                *
+        /                *
+        /****************/
+        if(checkDatas.length > 0) { 
+            for(let k=0; k<checkDatas.length; k++) {
+                for(let i=0; i<copyTempDataList.length; i++) {
+                    for(let j=0; j<copyTempDataList[i].length; j++) {
+                        if(i == checkDatas[k].row && j == checkDatas[k].cell) {
+                            let tempBox:{id:number, lv:number, nm:string} = copyTempDataList[i][j];
+                            let row1:number = -1;
+                            let cell1:number = -1;
+                            for(let x=0; x<copyTempDataList.length; x++) {
+                                cell1 = copyTempDataList[x].findIndex((item) => item.id === checkDatas[k].id);
+                                if(cell1 !== -1) {
+                                    row1 = x;
+                                    break;
+                                }
+                            }
+                            copyTempDataList[i][j] = copyTempDataList[row1][cell1];
+                            copyTempDataList[row1][cell1] = tempBox;
+                        }
+                    }
+                }
+            }
         }
 
-
-        // for(let i=copyTempDataList.length-1; i>=0; i--) {
-        //     for(let j=copyTempDataList[i].length-1; j>=0; j--) {
-        //         let n = Math.floor(Math.random() * (i+1));
-        //         let m = Math.floor(Math.random() * (j+1));
-        //         [copyTempDataList[n][j], copyTempDataList[i][m]] = [copyTempDataList[i][m], copyTempDataList[n][j]];
-        //     }
-	  	// }
-        // setTempDataList(copyTempDataList);
+        setTempDataList(copyTempDataList);
     }
 
     const balance = ():void => {
@@ -144,7 +164,43 @@ const step1 = () => {
                 chkIdx++;
             }
         }
+
+        if(checkDatas.length > 0) { 
+            for(let k=0; k<checkDatas.length; k++) {
+                for(let i=0; i<temp2DemList.length; i++) {
+                    for(let j=0; j<temp2DemList[i].length; j++) {
+                        if(i == checkDatas[k].row && j == checkDatas[k].cell) {
+                            let tempBox:{id:number, lv:number, nm:string} = temp2DemList[i][j];
+                            let row1:number = -1;
+                            let cell1:number = -1;
+                            for(let x=0; x<temp2DemList.length; x++) {
+                                cell1 = temp2DemList[x].findIndex((item) => item.id === checkDatas[k].id);
+                                if(cell1 !== -1) {
+                                    row1 = x;
+                                    break;
+                                }
+                            }
+                            temp2DemList[i][j] = temp2DemList[row1][cell1];
+                            temp2DemList[row1][cell1] = tempBox;
+                        }
+                    }
+                }
+            }
+        }
+
         setTempDataList(temp2DemList);
+    }
+
+    // 섞는 모션
+    const several = ():void => {     
+        let tmp:number = 10000;
+        let interval = setInterval(() => {
+            random();    
+            tmp -= 200;
+            if(tmp === 0) {
+                clearInterval(interval);
+            }
+        }, 200);
     }
 
     useEffect(() => {
@@ -182,6 +238,7 @@ const step1 = () => {
                 <button onClick={() => tempTest()}>다음</button>
                 <button onClick={() => random()}>무작위</button>
                 <button onClick={() => balance()}>밸런스</button>
+                <button onClick={() => several()}>여러번</button>
             </div>
         </div>
     )

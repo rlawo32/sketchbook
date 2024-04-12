@@ -20,7 +20,7 @@ const step1 = () => {
         let tempList:{id:number, lv:number, nm:string}[][] = Array.from({length: realTeams}, () => Array.from({length: realComposition}));
 
         if(personnel % teamCount !== 0) { // 인원 홀수일 경우 대응
-            let testComposition:number = Math.floor(personnel/teamCount);
+            let testComposition:number = Math.ceil(personnel/teamCount);
             let players:number = personnel;
             const teams:number = teamCount;
             const arr:number[] = [];

@@ -71,3 +71,4 @@ export const updateCheckData = atom(null, (get, set, data:{checked:boolean; inde
     }
 })
 
+

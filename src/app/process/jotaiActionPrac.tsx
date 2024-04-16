@@ -113,3 +113,120 @@ export const onClickRandom = atom(null, (get, set) => {
     }
     set(produceTeam, copyTempDataList);
 })
+
+export const onClickBalance = atom(null, (get, set) => {
+    const realPersonnel:number = get(personnel);
+    const realTeamCount:number = get(teamCount);
+    const realComposition:number = realPersonnel/realTeamCount;
+    const tempProduceTeam = get(produceTeam);
+    const tempPlayerFix = get(playerFix);
+
+    const copyTempDataList:{id:number, lv:number, nm:string}[][] = JSON.parse(JSON.stringify(tempProduceTeam));
+    const temp1DemList:{id:number, lv:number, nm:string}[] = [];
+    let temp2DemList:{id:number, lv:number, nm:string}[][] = Array.from({length: realTeamCount}, () => Array.from({length: realComposition}));
+
+    // 1. 1차원 객체 배열 생성 //
+    for(let i=0; i<copyTempDataList.length; i++) {
+        for(let j=0; j<copyTempDataList[i].length; j++) {
+            temp1DemList.push(copyTempDataList[i][j]);
+        }
+    }
+    // 2. 1차원 객체 배열 섞기 //
+    for(let i=temp1DemList.length-1; i>=0; i--) {
+        let j = Math.floor(Math.random() * (i+1));
+        [temp1DemList[i], temp1DemList[j]] = [temp1DemList[j], temp1DemList[i]];
+    }
+    // 3. 1차원 객체 배열 정렬(내림차순) //
+    temp1DemList.sort((a, b) => {
+        return b.lv - a.lv;
+    });
+    // 4. 인원이 홀수일 경우 2차원 배열 재생성 //
+    if(realPersonnel % realTeamCount !== 0) {
+        let tempComposition:number = Math.ceil(realPersonnel/realTeamCount);
+        let tempPersonnel:number = realPersonnel;
+        const cellArray:number[] = [];
+        let idx:number = 0;
+        // 4-1. 팀별 인원수 조정 //
+        for(let i=1; i<=realTeamCount; i++) {
+            cellArray[idx++] = tempComposition;
+            tempPersonnel -= tempComposition;
+            if((realTeamCount - i) === 2 && tempPersonnel % 2 === 0) {
+                tempComposition = tempPersonnel / 2;
+            } else if((realTeamCount - i) === 3 && tempPersonnel % 3 === 0) {
+                tempComposition = tempPersonnel / 3;
+            } else if((realTeamCount - i) === 1) {
+                tempComposition = tempPersonnel;
+            }
+        }
+        // 4-2. 조정된 팀별 인원으로 2차원 배열 재생성 //
+        temp2DemList = [];
+        temp2DemList = Array.from({length: realTeamCount});
+        for(let i=0; i<realTeamCount; i++) {
+            temp2DemList[i] = Array.from({length: cellArray[i]});
+        }
+    }
+
+    let tempComposition:number = Math.ceil(realPersonnel/realTeamCount);
+    let tempCompare:{idx:number, sum:number, len:number}[] = [];
+    // 팀별 합산 값, 길이 값 객체 생성 //
+    for(let i=0; i<realTeamCount; i++) {
+        tempCompare[i] = {idx:i, sum:0, len:temp2DemList[i].length};
+    }
+
+    // 5. 팀별 합산 값으로 밸런스 조정 //
+    for(let i=0; i<tempComposition; i++) {
+        let tmpIdx:number = 0;
+
+        // 5-1. 팀별 합산 정렬(오름차순) //
+        tempCompare.sort((a, b) => {
+            return a.sum - b.sum;
+        });
+        // 5-2. 적은 인원 팀 부터 정렬(오름차순) //
+        if(realPersonnel % realTeamCount !== 0) {
+            tempCompare.sort((a, b) => {
+                return a.len - b.len;
+            }); 
+        }
+        // 5-3. 정렬된 순서로 결과 생성 //
+        for(let j=0; j<realTeamCount; j++) {
+            if(temp2DemList[tempCompare[j].idx].length-1 >= i) {
+                temp2DemList[tempCompare[j].idx][i] = temp1DemList[tmpIdx++];
+            }
+        }
+        // 5-4. 생성된 결과 값으로 합산 //
+        for(let j=0; j<realTeamCount; j++) {
+            if(temp2DemList[tempCompare[j].idx].length-1 >= i) {
+                tempCompare[j].sum += temp2DemList[tempCompare[j].idx][i].lv;   
+            }
+        }
+    }
+
+    // 6. 고정 체크된 선수 처리 //
+    /* 
+       미리 저장했던 고정 체크한 정보를 이용해 정렬된 배열 상에서 
+       고정 체크한 인덱스 값을 찾아 저장한 값과 정렬된 배열의 인덱스 값과 교환
+    */
+    if(tempPlayerFix.length > 0) { 
+        for(let i=0; i<tempPlayerFix.length; i++) {
+            for(let j=0; j<temp2DemList.length; j++) {
+                for(let x=0; x<temp2DemList[j].length; x++) {
+                    if(j === tempPlayerFix[i].row && x === tempPlayerFix[i].cell) {
+                        let tempBox:{id:number, lv:number, nm:string} = temp2DemList[j][x];
+                        let row:number = -1;
+                        let cell:number = -1;
+                        for(let y=0; y<temp2DemList.length; y++) {
+                            cell = temp2DemList[y].findIndex((item) => item.id === tempPlayerFix[i].id);
+                            if(cell !== -1) {
+                                row = y;
+                                break;
+                            }
+                        }
+                        temp2DemList[j][x] = temp2DemList[row][cell];
+                        temp2DemList[row][cell] = tempBox;
+                    }
+                }
+            }
+        }
+    }
+    set(produceTeam, temp2DemList);
+})

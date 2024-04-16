@@ -1,5 +1,19 @@
 import { atom } from "jotai";
-import { personnel, teamCount, produceTeam, playerFix } from "./jotaiAtoms";
+import { personnel, teamCount, produceTeam, playerFix, testAtom } from "./jotaiAtoms";
+
+// test
+export const testAction1 = atom((get) => get(testAtom) + 1);
+export const testAction2 = atom((get) => get(testAtom), (get, set) => {
+    const val = get(testAtom);
+    const res = val + 100;
+    set(testAtom, res);
+});
+export const testAction3 = atom(null, (get, set) => {
+    const val = get(testAtom);
+    const res = val + 200;
+    set(testAtom, res);
+});
+// test
 
 export const createTeams = atom(null, (get, set) => {
     const realPersonnel:number = get(personnel);

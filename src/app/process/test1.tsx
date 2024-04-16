@@ -4,8 +4,8 @@ import styles from "./../page.module.css";
 import { useState, useEffect } from "react";
 
 import {atom, useAtom, useAtomValue, useSetAtom} from "jotai"; 
-import {processStep, personnel, teamCount} from "./jotaiAtoms";
-import {createTeams} from "./jotaiActions"
+import {processStep, personnel, teamCount, testAtom} from "./jotaiAtoms";
+import {createTeams, testAction3} from "./jotaiActions"
 
 const test1 = () => {
     const step = useAtomValue(processStep);
@@ -13,6 +13,17 @@ const test1 = () => {
     const [, setPersonnel] = useAtom(personnel);
     const [, setTeamCount] = useAtom(teamCount);
     const [, setCreateTeams] = useAtom(createTeams);
+
+    // test
+    // const [, setTestAtom1] = useAtom(testAction3);
+    const setTestAtom1 = useSetAtom(testAction3);
+
+    const val = useAtomValue(testAtom);
+    const test = () => {
+        setTestAtom1();
+        console.log(val);
+    }
+    // test
 
     const [stepProcess, setStepProcess] = useState<number>(0);
 

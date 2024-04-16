@@ -71,4 +71,45 @@ export const updateCheckData = atom(null, (get, set, data:{checked:boolean; inde
     }
 })
 
+export const onClickRandom = atom(null, (get, set) => {
+    const tempProduceTeam = get(produceTeam);
+    const tempPlayerFix = get(playerFix);
+    const copyTempDataList:{id:number, lv:number, nm:string}[][] = JSON.parse(JSON.stringify(tempProduceTeam));
 
+    // 1. 배열 랜덤하게 정렬
+    for(let i=copyTempDataList.length-1; i>=0; i--) { 
+        for(let j=copyTempDataList[i].length-1; j>=0; j--) {
+            let n = Math.floor(Math.random() * (i+1));
+            let m = Math.floor(Math.random() * (j+1));
+            [copyTempDataList[n][j], copyTempDataList[i][m]] = [copyTempDataList[i][m], copyTempDataList[n][j]];
+        }
+      }
+    // 2. 고정 체크된 선수 처리 //
+    /* 
+       미리 저장했던 고정 체크한 정보를 이용해 정렬된 배열 상에서 
+       고정 체크한 인덱스 값을 찾아 저장한 값과 정렬된 배열의 인덱스 값과 교환
+    */
+    if(tempPlayerFix.length > 0) { 
+        for(let i=0; i<tempPlayerFix.length; i++) {
+            for(let j=0; j<copyTempDataList.length; j++) {
+                for(let x=0; x<copyTempDataList[j].length; x++) {
+                    if(j === tempPlayerFix[i].row && x === tempPlayerFix[i].cell) {
+                        let tempBox:{id:number, lv:number, nm:string} = copyTempDataList[j][x];
+                        let row:number = -1;
+                        let cell:number = -1;
+                        for(let y=0; y<copyTempDataList.length; y++) {
+                            cell = copyTempDataList[y].findIndex((item) => item.id === tempPlayerFix[i].id);
+                            if(cell !== -1) {
+                                row = y;
+                                break;
+                            }
+                        }
+                        copyTempDataList[j][x] = copyTempDataList[row][cell];
+                        copyTempDataList[row][cell] = tempBox;
+                    }
+                }
+            }
+        }
+    }
+    set(produceTeam, copyTempDataList);
+})

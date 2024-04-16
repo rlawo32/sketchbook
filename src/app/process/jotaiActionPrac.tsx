@@ -1,13 +1,15 @@
-import { atom, useAtomValue } from "jotai";
-import {processStep, personnel, teamCount, produceTeam, playerFix} from "./jotaiAtoms";
+import { atom } from "jotai";
+import { personnel, teamCount, produceTeam, playerFix } from "./jotaiAtoms";
 
 export const createTeams = atom(null, (get, set) => {
     const realPersonnel:number = get(personnel);
     const realTeamCount:number = get(teamCount);
     const realComposition:number = realPersonnel/realTeamCount;
 
+    // 1. 입력한 인원, 팀수로 2차원 배열 생성 //
     let temp2DemList:{id:number, lv:number, nm:string}[][] = Array.from({length: realTeamCount}, () => Array.from({length: realComposition}));
 
+    // 2. 인원이 홀수일 경우 2차원 배열 재생성 //
     if(realPersonnel % realTeamCount !== 0) {
         let tempComposition:number = Math.ceil(realPersonnel/realTeamCount);
         let tempPersonnel:number = realPersonnel;
@@ -29,12 +31,11 @@ export const createTeams = atom(null, (get, set) => {
         temp2DemList = [];
         temp2DemList = Array.from({length: realTeamCount});
 
-        
         for(let i=0; i<realTeamCount; i++) {
             temp2DemList[i] = Array.from({length: cellArray[i]});
         }
     }
-
+    // 3. 생성된 2차원 배열에 객체 생성 //
     for(let i=0; i<temp2DemList.length; i++) {
         let plus:number = 1;
         for(let j=0; j<temp2DemList[i].length; j++) {

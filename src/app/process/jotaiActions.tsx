@@ -85,7 +85,7 @@ export const updateCheckData = atom(null, (get, set, data:{checked:boolean; inde
     }
 })
 
-export const onClickRandom = atom(null, (get, set) => {
+export const activeRandom = atom(null, (get, set) => {
     const tempProduceTeam = get(produceTeam);
     const tempPlayerFix = get(playerFix);
     const copyTempDataList:{id:number, lv:number, nm:string}[][] = JSON.parse(JSON.stringify(tempProduceTeam));
@@ -128,7 +128,7 @@ export const onClickRandom = atom(null, (get, set) => {
     set(produceTeam, copyTempDataList);
 })
 
-export const onClickBalance = atom(null, (get, set) => {
+export const activeBalance = atom(null, (get, set) => {
     const realPersonnel:number = get(personnel);
     const realTeamCount:number = get(teamCount);
     const realComposition:number = realPersonnel/realTeamCount;

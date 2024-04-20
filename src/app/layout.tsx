@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import JotaiProviderWrapper from "./JotaiProviderWrapper"
+import StyledComponentsRegistry from "./StyledComponentsRegistry";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <JotaiProviderWrapper>
-          {children}
-        </JotaiProviderWrapper>
+        {/* <StyledComponentsRegistry>
+          <JotaiProviderWrapper> */}
+            {children}
+          {/* </JotaiProviderWrapper>
+        </StyledComponentsRegistry> */}
       </body>
     </html>
   );

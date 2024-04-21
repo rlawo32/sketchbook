@@ -9,10 +9,10 @@ import {
     updateCheckData, activeRandom, activeBalance
 } from "./jotaiActions"
 
-const InputFadeUp = styled('input')`
+const InputFadeUp = styled('input')<{$timing:number}>`
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
-    animation-delay: .1s;
+    animation-delay: .${({$timing}) => $timing}s;
 
     @keyframes fade-up {
         from {
@@ -43,10 +43,10 @@ const BtnFadeUp = styled('button')`
     }
 `;
 
-const CheckFadeUp = styled('input')`
+const CheckFadeUp = styled('input')<{$timing:number}>`
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
-    animation-delay: .3s;
+    animation-delay: .${({$timing}) => $timing}s;
 
     @keyframes fade-up {
         from {
@@ -60,9 +60,10 @@ const CheckFadeUp = styled('input')`
     }
 `;
 
-const SelectFadeUp = styled('select')`
+const SelectFadeUp = styled('select')<{$timing:number}>`
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
+    animation-delay: .${({$timing}) => $timing}s;
 
     @keyframes fade-up {
         from {
@@ -125,11 +126,14 @@ const InsertData2 = () => {
                 <div key={idx1}>
                     {parent.map((child, idx2) => (
                         <div key={idx2}>
-                            <SelectFadeUp onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)} )} value={child.lv}>
+                            <SelectFadeUp onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)})} value={child.lv}
+                                          $timing={idx2}>
                                 {onActiveSelectBox()}
                             </SelectFadeUp>
-                            <InputFadeUp type="text" id={"input_" + child.id} onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} />
-                            <CheckFadeUp type="checkbox" onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} />
+                            <InputFadeUp type="text" id={"input_" + child.id} onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
+                                         $timing={idx2} />
+                            <CheckFadeUp type="checkbox" onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
+                                         $timing={idx2+parent.length} id={`${idx2+parent.length}`}/>
                         </div>
                     ))}
                 </div>

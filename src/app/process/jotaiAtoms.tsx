@@ -7,5 +7,3 @@ export const teamCount = atom<number>(0);                                       
 export const produceTeam = atom<{id:number, lv:number, nm:string}[][]>([[]]);   // 생성된 팀
 export const playerFix = atom<{id:number, row:number, cell:number}[]>([]);      // 고정 팀원
 
-
-export const testAtom = atom<number>(0);                                        // 테스트

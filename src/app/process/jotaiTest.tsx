@@ -1,28 +1,43 @@
 'use client';
 
-import { atom, useAtom } from "jotai";
-import { useEffect } from "react";
+import { useAtom, useAtomValue } from "jotai";
+import { useRef } from "react";
 
-const test1 = atom<number>(0);
-
-const testAction1 = atom((get) => get(test1) + 1);
-const testAction2 = atom(null, (get, set) => {
-    const val = get(test1);
-    const res = val + 1;
-    set(test1, res);
-});
+import {dataArr} from "./testAtoms";
+import {actionInsertInput, actionDeleteInput, actionUpdateInput} from "./testActions";
 
 const JotaiTest = () => {
-    const [testVal] = useAtom(testAction1);
-    const [, setTestVal] = useAtom(testAction2);
+    const inputRef = useRef<number>(0);
 
-    useEffect(() => {
-        console.log("값 확인 : " + testVal);
-    }, [testVal])
+    const inputData = useAtomValue(dataArr);
+    const [, setInsertInput] = useAtom(actionInsertInput);
+    const [, setDeleteInput] = useAtom(actionDeleteInput);
+    const [, setUpdateInput] = useAtom(actionUpdateInput);
+
+    const actionAdd = ():void => {
+        setInsertInput(inputRef.current+1);
+        inputRef.current += 1;
+    }
 
     return (
         <div>
-            <button onClick={() => setTestVal()}>click</button>
+            <center>
+                <h1>Input 추가하기</h1>
+            </center>
+
+            <br/><br/><br/>
+
+            {inputData.map((item, idx) => (
+                <div key={idx}>
+                    <input type="text" value={item.content} id={item.id+""} onChange={(e) =>setUpdateInput({idx:item.id, val:e.target.value})}/>
+                    {
+                        idx == 0 ? 
+                            <button onClick={() => actionAdd()}>추가</button>
+                            :
+                            <button onClick={() => setDeleteInput(item.id)}>삭제</button>
+                    }
+                </div>
+            ))}
         </div>
     )
 }

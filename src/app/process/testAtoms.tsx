@@ -1,3 +1,3 @@
 import { atom } from "jotai";
 
-export const testAtom = atom<number>(0);                                        // 테스트
+export const dataArr = atom<{id:number, content:string}[]>([{id:0, content:''}]);

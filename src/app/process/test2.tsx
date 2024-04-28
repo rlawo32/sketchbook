@@ -2,7 +2,7 @@
 
 import {useAtom, useAtomValue} from "jotai"; 
 import {processStep, produceTeam} from "./jotaiAtoms";
-import {updateCheckData, updateInputData, updateSelectData, onClickRandom, onClickBalance} from "./jotaiActions";
+import {updateCheckData, updateInputData, updateSelectData} from "./jotaiActions";
 
 const test2 = () => {
 
@@ -23,30 +23,7 @@ const test2 = () => {
     const [, setInputData] = useAtom(updateInputData);
     const [, setSelectData] = useAtom(updateSelectData);
     const [, setCheckData] = useAtom(updateCheckData);
-    const [, setRandomData] = useAtom(onClickRandom);
-    const [, setBalanceData] = useAtom(onClickBalance);
 
-    const random = () => {
-        let tmp:number = 5000;
-        let interval = setInterval(() => {
-            setRandomData();    
-            tmp -= 200;
-            if(tmp === 0) {
-                clearInterval(interval);
-            }
-        }, 200);
-    }
-
-    const balance = () => {
-        let tmp:number = 5000;
-        let interval = setInterval(() => {
-            setBalanceData();    
-            tmp -= 200;
-            if(tmp === 0) {
-                clearInterval(interval);
-            }
-        }, 200);
-    }
 
     return (
         <div style={steps === 2 ? {display:"block"} : {display:"none"}}>

@@ -63,7 +63,7 @@ export const updateSelectData = atom(null, (get, set, data:{index:number; arrNo:
     set(produceTeam, copyTempDataList);
 })
 
-export const updateCheckData = atom(null, (get, set, data:{checked:boolean; index:number; arrNo:number; value:number;}) => {
+export const updateCheckData = atom((get) => get(playerFix), (get, set, data:{checked:boolean; index:number; arrNo:number; value:number;}) => {
     if(data.checked) {
         set(playerFix, (prev => [...prev, {id:data.index, row:data.arrNo, cell:data.value}]));
     } else {

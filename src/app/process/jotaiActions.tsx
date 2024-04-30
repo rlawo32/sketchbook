@@ -173,9 +173,9 @@ export const activeBalance = atom(null, (get, set) => {
         tempCompare[i] = {idx:i, sum:0, len:temp2DemList[i].length};
     }
 
+    let tmpIdx:number = 0;
     // 5. 팀별 합산 값으로 밸런스 조정 //
     for(let i=0; i<tempComposition; i++) {
-        let tmpIdx:number = 0;
 
         // 5-1. 팀별 합산 정렬(오름차순) //
         tempCompare.sort((a, b) => {

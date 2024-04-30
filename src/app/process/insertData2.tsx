@@ -19,8 +19,6 @@ const StepStyle = styled('div')<{$step:number}>`
     .list_section {
         display: flex;
 
-        
-
         .list_parent {
             margin: 0 30px;
         }
@@ -87,7 +85,7 @@ const BtnFadeUp = styled('button')`
 `;
 
 const CheckFadeUp = styled('input')`
-    appearance: none;
+    
     width: 1.5rem;
     height: 1.5rem;
 `;
@@ -112,6 +110,50 @@ const LabelFadeUp = styled('label')<{$timing:number}>`
             transform: none;
             opacity: 1;
         }
+    }
+`;
+
+const PinFadeUp = styled('div')<{$check:boolean}>`
+    position: absolute;
+    border-radius: 0 16px 16px 0;
+    transform: scale(0.8);
+
+    svg {
+        overflow: visible;
+    }
+
+    #pin-fill {
+        fill: #6E7BF2;
+        transform: translate(14px, 33px) scale(${({$check}) => $check ? 1 : 0});
+        transition: all 0.4s ease;
+        transition-delay: 0.12 * 1;
+        transition-duration: 0.33 * 1;
+    }
+
+    #pin-drop {
+        fill: #6E7BF2;
+        transform-origin: calc(${({$check}) => $check ? -0.5 : 0.5} * 5%) 0;
+        opacity: calc((1 - ${({$check}) => $check ? 0 : 1}) * 0.25);
+        transform: translate(14px, 33px) scale(${({$check}) => $check ? 1 : 0});
+        transition: all 0.3s ease;
+    }
+      
+    #pin-drop:first-child {
+        opacity: calc(1 - ${({$check}) => $check ? 0 : 1});
+        transform: translate(14px, 33px) scale(${({$check}) => $check ? 1 : 0});
+        transition: all 0.3s ease;
+    }
+
+    #mask-fill, #pin-outline {
+        stroke-width: 3px;
+        stroke: #BABAC1;
+        fill: #2C2C31;
+    }
+
+    #pin {
+        transform: translateY(${({$check}) => $check ? 0 : -8}px) rotateZ(${({$check}) => $check ? -0.5 : 0.5}deg); 
+        transition: all 0.1s;
+        transform-origin: 50% 90%;
     }
 `;
 
@@ -142,7 +184,7 @@ const InsertData2 = () => {
     const [step, setStep] = useAtom(processStep);
     const [, setInputData] = useAtom(updateInputData);
     const [, setSelectData] = useAtom(updateSelectData);
-    const [, setCheckData] = useAtom(updateCheckData);
+    const [checkData, setCheckData] = useAtom(updateCheckData);
     const [, setRandomData] = useAtom(activeRandom);
     const [, setBalanceData] = useAtom(activeBalance);
 
@@ -199,22 +241,24 @@ const InsertData2 = () => {
                                             
                                 <LabelFadeUp htmlFor={"chkbx" + child.id} $timing={idx2+parent.length}>
                                     <CheckFadeUp type="checkbox" id={"chkbx" + child.id} 
-                                                 onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} />
-                                    <div className="pin">
+                                                 onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
+                                                 checked={checkData.some(data => data.id === child.id) ? true : false}/>
+                                    <PinFadeUp $check={checkData.some(data => data.id === child.id) ? true : false}>
+                                        {/* {checkData.some(data => data.id === child.id) ?<div/>:<div/>} */}
+                                                        
                                         <svg width="28" height="39" viewBox="0 0 28 39">
-                                            <ellipse id="pin-drop" rx="30" ry="15"/>
                                             <ellipse id="pin-drop" rx="20" ry="10"/>
                                             <g id="pin">
                                                 <path id="pin-outline" d="M23.2868 17.8471L25.6099 19.9765C27.0233 21.2722 25.9789 23.6561 24.0663 23.5218C22.0209 23.3782 19.6865 23.2372 17.4707 23.1553C17.2349 24.3851 15.6175 32.5 14.0001 32.5C12.3826 32.5 10.7652 24.3847 10.5294 23.1553C8.31299 23.2371 5.97783 23.3782 3.93189 23.5218C2.01924 23.6561 0.974913 21.2722 2.38831 19.9765L4.6978 17.8595C5.54732 17.0808 6.1603 16.076 6.397 14.9481C6.6819 13.5905 7.01306 11.6911 6.99908 10.25C6.9923 9.54993 6.69118 8.81942 6.23976 8.115C4.70814 5.72496 4.87443 2.79074 7.68558 2.39631C9.34716 2.16318 11.4284 2 13.9991 2C16.6405 2 18.765 2.17227 20.4486 2.41569C23.2218 2.81664 23.4312 5.71451 21.853 8.02978C21.3442 8.77626 20.9991 9.5431 20.9991 10.25C20.9991 11.7792 21.3221 13.6428 21.6009 14.9667C21.8361 16.0831 22.4458 17.0761 23.2868 17.8471Z"/>
                                                 <mask id="mask-fill" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="28" height="34">
-                                                <path d="M23.2868 17.8471L25.6099 19.9765C27.0233 21.2722 25.9789 23.6561 24.0663 23.5218C22.0209 23.3782 19.6865 23.2372 17.4707 23.1553C17.2349 24.3851 15.6175 32.5 14.0001 32.5C12.3826 32.5 10.7652 24.3847 10.5294 23.1553C8.31299 23.2371 5.97783 23.3782 3.93189 23.5218C2.01924 23.6561 0.974913 21.2722 2.38831 19.9765L4.6978 17.8595C5.54732 17.0808 6.1603 16.076 6.397 14.9481C6.6819 13.5905 7.01306 11.6911 6.99908 10.25C6.9923 9.54993 6.69118 8.81942 6.23976 8.115C4.70814 5.72496 4.87443 2.79074 7.68558 2.39631C9.34716 2.16318 11.4284 2 13.9991 2C16.6405 2 18.765 2.17227 20.4486 2.41569C23.2218 2.81664 23.4312 5.71451 21.853 8.02978C21.3442 8.77626 20.9991 9.5431 20.9991 10.25C20.9991 11.7792 21.3221 13.6428 21.6009 14.9667C21.8361 16.0831 22.4458 17.0761 23.2868 17.8471Z"/>
+                                                    <path d="M23.2868 17.8471L25.6099 19.9765C27.0233 21.2722 25.9789 23.6561 24.0663 23.5218C22.0209 23.3782 19.6865 23.2372 17.4707 23.1553C17.2349 24.3851 15.6175 32.5 14.0001 32.5C12.3826 32.5 10.7652 24.3847 10.5294 23.1553C8.31299 23.2371 5.97783 23.3782 3.93189 23.5218C2.01924 23.6561 0.974913 21.2722 2.38831 19.9765L4.6978 17.8595C5.54732 17.0808 6.1603 16.076 6.397 14.9481C6.6819 13.5905 7.01306 11.6911 6.99908 10.25C6.9923 9.54993 6.69118 8.81942 6.23976 8.115C4.70814 5.72496 4.87443 2.79074 7.68558 2.39631C9.34716 2.16318 11.4284 2 13.9991 2C16.6405 2 18.765 2.17227 20.4486 2.41569C23.2218 2.81664 23.4312 5.71451 21.853 8.02978C21.3442 8.77626 20.9991 9.5431 20.9991 10.25C20.9991 11.7792 21.3221 13.6428 21.6009 14.9667C21.8361 16.0831 22.4458 17.0761 23.2868 17.8471Z"/>
                                                 </mask>
                                                 <g mask="url(#mask-fill)">
-                                                <ellipse id="pin-fill" rx="80" ry="40"/>
+                                                    <ellipse id="pin-fill" rx="80" ry="40"/>
                                                 </g>
                                             </g>
                                         </svg>
-                                    </div>
+                                    </PinFadeUp>
                                 </LabelFadeUp>
                             </div>
                         ))}

@@ -43,7 +43,6 @@ const InputFadeUp = styled('input')`
 
 const BtnFadeUp = styled('button')`
     display: block;
-    
     margin: 20px auto;
     padding: 5px 25px;
     border: none;
@@ -51,6 +50,7 @@ const BtnFadeUp = styled('button')`
     background: rgba(42,50,113, .68);
     color: #6cacc5;
     font-size: 18px;
+    cursor: pointer;
 
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);

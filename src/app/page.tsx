@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <main className={styles.main}>
       
-      {/* <InsertData1 />
-      <InsertData2 /> */}
+      <InsertData1 />
+      <InsertData2 />
 
-      <JotaiTest />
+      {/* <JotaiTest /> */}
 
     </main>
   );

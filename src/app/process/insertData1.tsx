@@ -12,6 +12,27 @@ const StepStyle = styled('div')<{$step:number}>`
     height: 500px;
     align-items: center;
     justify-content: center;
+
+    .btn_section {
+        display: flex;
+        width: 250px;
+        margin: auto;
+
+        opacity: 0;
+        animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
+        animation-delay: .1s;
+    
+        @keyframes fade-up {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: none;
+                opacity: 1;
+            }
+        }
+    }
 `;
 
 const InputFadeUp = styled('input')`
@@ -51,21 +72,6 @@ const BtnFadeUp = styled('button')`
     color: #6cacc5;
     font-size: 18px;
     cursor: pointer;
-
-    opacity: 0;
-    animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
-    animation-delay: .1s;
-
-    @keyframes fade-up {
-        from {
-            transform: translateY(100px);
-            opacity: 0;
-        }
-        to {
-            transform: none;
-            opacity: 1;
-        }
-    }
 `;
 
 const InsertData1 = () => {
@@ -85,11 +91,15 @@ const InsertData1 = () => {
         <StepStyle $step={step}>
             <div style={step === 1 ? {display: "block"} : {display: "none"}} className="fade-up" >
                 <InputFadeUp type="text" onChange={(e) => setPersonnel(parseInt(e.target.value))}  />
-                <BtnFadeUp onClick={() => onClickNextStep(2)}>다음</BtnFadeUp>
+                <div className="btn_section">
+                    <BtnFadeUp onClick={() => onClickNextStep(2)}>다음</BtnFadeUp>
+                </div>
             </div>
             <div style={step === 2 ? {display: "block"} : {display: "none"}} className="fade-up" >    
                 <InputFadeUp type="text" onChange={(e) => setTeamCount(parseInt(e.target.value))} />
-                <BtnFadeUp onClick={() => onClickNextStep(3)}>다음</BtnFadeUp>
+                <div className="btn_section">
+                    <BtnFadeUp onClick={() => onClickNextStep(3)}>다음</BtnFadeUp>
+                </div>
             </div>
         </StepStyle>
     )

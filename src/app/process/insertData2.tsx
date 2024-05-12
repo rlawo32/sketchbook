@@ -100,6 +100,9 @@ const InsertData2 = () => {
                                 <Style.FadeUp2 $timing={idx2+2}>
                                     <Style.CheckStyle onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
                                                  checked={checkData.some(data => data.id === child.id) ? true : false} type="checkbox" id={"chkbx" + child.id} />
+                                    <Style.ToolTipStyle className="tooltip">
+                                        선수 고정
+                                    </Style.ToolTipStyle>
                                 </Style.FadeUp2>
                             </div>
                         ))}

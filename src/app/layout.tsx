@@ -17,13 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={inter.className}>
-        {/* <StyledComponentsRegistry>
-          <JotaiProviderWrapper> */}
+        <StyledComponentsRegistry>
+          {/* <JotaiProviderWrapper> */}
             {children}
-          {/* </JotaiProviderWrapper>
-        </StyledComponentsRegistry> */}
+          {/* </JotaiProviderWrapper> */}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

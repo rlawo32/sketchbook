@@ -91,17 +91,21 @@ const InsertData2 = () => {
                                     <Style.SelectStyle onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)})} value={child.lv}>
                                         {onActiveSelectBox()}
                                     </Style.SelectStyle>    
+                                    <Style.ToolTipStyle className="tooltip">
+                                         Level
+                                    </Style.ToolTipStyle>
                                 </Style.FadeUp2>
                                 <Style.FadeUp2 $timing={idx2+1}>
                                     <Style.InputStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
-                                                 type="text" id={"input_" + child.id} />
+                                                 type="text" id={"input_" + child.id} placeholder="Enter Username" />
                                 </Style.FadeUp2>
                                 
                                 <Style.FadeUp2 $timing={idx2+2}>
                                     <Style.CheckStyle onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
                                                  checked={checkData.some(data => data.id === child.id) ? true : false} type="checkbox" id={"chkbx" + child.id} />
+                                    <Style.LabelStyle htmlFor={"chkbx" + child.id} className="check-box" />
                                     <Style.ToolTipStyle className="tooltip">
-                                        선수 고정
+                                        Fix
                                     </Style.ToolTipStyle>
                                 </Style.FadeUp2>
                             </div>

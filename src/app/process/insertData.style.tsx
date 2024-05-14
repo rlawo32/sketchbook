@@ -98,7 +98,7 @@ export const CheckStyle = styled('input')`
         border-color:#34b93d;
     
         &::after{
-            height: 50px;
+            height: 25px;
             -moz-animation: dothabottomcheck .2s ease 0s forwards;
             -o-animation: dothabottomcheck .2s ease 0s forwards;
             -webkit-animation: dothabottomcheck .2s ease 0s forwards;
@@ -106,7 +106,7 @@ export const CheckStyle = styled('input')`
         }
         
         &::before{
-            height: 120px;
+            height: 60px;
             -moz-animation: dothatopcheck .4s ease 0s forwards;
             -o-animation: dothatopcheck .4s ease 0s forwards;
             -webkit-animation: dothatopcheck .4s ease 0s forwards;
@@ -117,7 +117,7 @@ export const CheckStyle = styled('input')`
             border-color:#34b93d;
     
             &::after{
-                height: 50px;
+                height: 25px;
                 -moz-animation: dothabottomcheck .2s ease 0s forwards;
                 -o-animation: dothabottomcheck .2s ease 0s forwards;
                 -webkit-animation: dothabottomcheck .2s ease 0s forwards;
@@ -125,7 +125,7 @@ export const CheckStyle = styled('input')`
             }
             
             &::before{
-                height: 120px;
+                height: 60px;
                 -moz-animation: dothatopcheck .4s ease 0s forwards;
                 -o-animation: dothatopcheck .4s ease 0s forwards;
                 -webkit-animation: dothatopcheck .4s ease 0s forwards;
@@ -164,8 +164,8 @@ export const CheckStyle = styled('input')`
 `;
 
 export const LabelStyle = styled('label')`
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     background-color: transparent;
     border: 10px solid #000;
     border-radius: 5px;
@@ -186,7 +186,7 @@ export const LabelStyle = styled('label')`
         box-sizing: border-box;
         position: absolute;
         height: 0;
-        width: 20px;
+        width: 10px;
         background-color: #34b93d;
         display: inline-block;
         -moz-transform-origin: left top;
@@ -202,9 +202,9 @@ export const LabelStyle = styled('label')`
     }
 
     &::before {
-        top: 72px;
-        left: 41px;
-        box-shadow: 0 0 0 5px #667788;
+        top: 57px;
+        left: 28px;
+        /* box-shadow: 0 0 0 5px #667788; */
         -moz-transform: rotate(-135deg);
         -ms-transform: rotate(-135deg);
         -o-transform: rotate(-135deg);
@@ -213,8 +213,8 @@ export const LabelStyle = styled('label')`
     }
 
     &::after {
-        top: 37px;
-        left: 5px;
+        top: 38px;
+        left: 8px;
         -moz-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
         -o-transform: rotate(-45deg);
@@ -226,7 +226,7 @@ export const LabelStyle = styled('label')`
         border-color:#34b93d;
     
         &::after{
-            height: 50px;
+            height: 25px;
             -moz-animation: dothabottomcheck .2s ease 0s forwards;
             -o-animation: dothabottomcheck .2s ease 0s forwards;
             -webkit-animation: dothabottomcheck .2s ease 0s forwards;
@@ -234,7 +234,7 @@ export const LabelStyle = styled('label')`
         }
         
         &::before{
-            height: 120px;
+            height: 60px;
             -moz-animation: dothatopcheck .4s ease 0s forwards;
             -o-animation: dothatopcheck .4s ease 0s forwards;
             -webkit-animation: dothatopcheck .4s ease 0s forwards;

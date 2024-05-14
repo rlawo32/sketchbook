@@ -135,31 +135,31 @@ export const CheckStyle = styled('input')`
     }
 
     @-moz-keyframes dothabottomcheck{
-        0% { height: 0; }
-        100% { height: 50px; }
+      0% { height: 0; }
+      100% { height: 24px; }
     } 
     @-webkit-keyframes dothabottomcheck{
-        0% { height: 0; }
-        100% { height: 50px; }
+      0% { height: 0; }
+      100% { height: 24px; }
     }
     @keyframes dothabottomcheck{
-        0% { height: 0; }
-        100% { height: 50px;  }
+      0% { height: 0; }
+      100% { height: 24px;  }
     }
     @keyframes dothatopcheck{
-        0% { height: 0; }
-        50% { height: 0; }
-        100% { height: 120px; }
+      0% { height: 0; }
+      50% { height: 0; }
+      100% { height: 50px; }
     }
     @-webkit-keyframes dothatopcheck{
-        0% { height: 0; }
-        50% { height: 0; }
-        100% { height: 120px; }
+      0% { height: 0; }
+      50% { height: 0; }
+      100% { height: 50px; }
     }
     @-moz-keyframes dothatopcheck{
-        0% { height: 0; }
-        50% { height: 0; }
-        100% { height: 120px; }
+      0% { height: 0; }
+      50% { height: 0; }
+      100% { height: 50px; }
     }
 `;
 
@@ -242,33 +242,32 @@ export const LabelStyle = styled('label')`
         }
     }
 
-    
     @-moz-keyframes dothabottomcheck{
-        0% { height: 0; }
-        100% { height: 50px; }
+      0% { height: 0; }
+      100% { height: 24px; }
     } 
     @-webkit-keyframes dothabottomcheck{
-        0% { height: 0; }
-        100% { height: 50px; }
+      0% { height: 0; }
+      100% { height: 24px; }
     }
     @keyframes dothabottomcheck{
-        0% { height: 0; }
-        100% { height: 50px;  }
+      0% { height: 0; }
+      100% { height: 24px;  }
     }
     @keyframes dothatopcheck{
-        0% { height: 0; }
-        50% { height: 0; }
-        100% { height: 120px; }
+      0% { height: 0; }
+      50% { height: 0; }
+      100% { height: 50px; }
     }
     @-webkit-keyframes dothatopcheck{
-        0% { height: 0; }
-        50% { height: 0; }
-        100% { height: 120px; }
+      0% { height: 0; }
+      50% { height: 0; }
+      100% { height: 50px; }
     }
     @-moz-keyframes dothatopcheck{
-        0% { height: 0; }
-        50% { height: 0; }
-        100% { height: 120px; }
+      0% { height: 0; }
+      50% { height: 0; }
+      100% { height: 50px; }
     }
 `;
 

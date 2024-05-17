@@ -20,9 +20,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          {/* <JotaiProviderWrapper> */}
+          <JotaiProviderWrapper>
             {children}
-          {/* </JotaiProviderWrapper> */}
+          </JotaiProviderWrapper>
         </StyledComponentsRegistry>
       </body>
     </html>

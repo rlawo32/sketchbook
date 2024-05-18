@@ -1,23 +1,6 @@
 import styled from "styled-components";
 
-export const FadeUp1 = styled('div')<{$timing:number}>`
-    opacity: 0;
-    animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
-    animation-delay: .${({$timing}) => $timing+1}s;
-
-    @keyframes fade-up {
-        from {
-            transform: translateY(100px);
-            opacity: 0;
-        }
-        to {
-            transform: none;
-            opacity: 1;
-        }
-    }
-`;
-
-export const FadeUp2 = styled('div')<{$timing:number}>`
+export const FadeUp = styled('div')<{$timing:number}>`
     display: inline-block;
     margin: auto;
     opacity: 0;

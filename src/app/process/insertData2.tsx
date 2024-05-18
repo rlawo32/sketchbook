@@ -12,7 +12,7 @@ import {
 } from "./jotaiActions"
 
 const StepStyle = styled('div')<{$step:number}>`
-    display: ${({$step}) => $step > 2 ? "block" : "none"};
+    display: ${({$step}) => $step > 1 ? "block" : "none"};
     height: 500px;
     align-items: center;
     justify-content: center;
@@ -87,39 +87,39 @@ const InsertData2 = () => {
                     <div key={idx1} className="list_parent">
                         {parent.map((child, idx2) => (
                             <div key={idx2} className="list_child">
-                                <Style.FadeUp2 $timing={idx2}>
+                                <Style.FadeUp $timing={idx2}>
                                     <Style.SelectStyle onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)})} value={child.lv}>
                                         {onActiveSelectBox()}
                                     </Style.SelectStyle>    
                                     <Style.ToolTipStyle className="tooltip">
                                          Level
                                     </Style.ToolTipStyle>
-                                </Style.FadeUp2>
-                                <Style.FadeUp2 $timing={idx2+1}>
+                                </Style.FadeUp>
+                                <Style.FadeUp $timing={idx2+1}>
                                     <Style.InputStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
                                                  type="text" id={"input_" + child.id} placeholder="Enter Username" />
-                                </Style.FadeUp2>
+                                </Style.FadeUp>
                                 
-                                <Style.FadeUp2 $timing={idx2+2}>
+                                <Style.FadeUp $timing={idx2+2}>
                                     <Style.CheckStyle onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
                                                  checked={checkData.some(data => data.id === child.id) ? true : false} type="checkbox" id={"chkbx" + child.id} />
                                     <Style.LabelStyle htmlFor={"chkbx" + child.id} className="check-box" />
                                     <Style.ToolTipStyle className="tooltip">
                                         Fix
                                     </Style.ToolTipStyle>
-                                </Style.FadeUp2>
+                                </Style.FadeUp>
                             </div>
                         ))}
                     </div>
                 ))}
             </div>
             <div className="btn_section">
-                <Style.FadeUp2 $timing={0}>
+                <Style.FadeUp $timing={0}>
                     <Style.BtnStyle onClick={() => onClickRandom()}>무작위</Style.BtnStyle>
-                </Style.FadeUp2>
-                <Style.FadeUp2 $timing={1}>
+                </Style.FadeUp>
+                <Style.FadeUp $timing={1}>
                     <Style.BtnStyle onClick={() => onClickBalance()}>밸런스</Style.BtnStyle>
-                </Style.FadeUp2>
+                </Style.FadeUp>
             </div>
         </StepStyle>
     )

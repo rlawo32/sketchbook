@@ -66,7 +66,7 @@ const InsertData1 = () => {
     
     const onClickNextStep = (next:number):void => {
         setStep(next);
-        if(next === 3) {
+        if(next === 2) {
             setCreateTeams();
         }
     }
@@ -75,15 +75,8 @@ const InsertData1 = () => {
         <StepStyle $step={step}>
         <div style={step === 1 ? {display: "block"} : {display: "none"}} className="fade-up" >
             <Style.InputStyle type="text" onChange={(e) => setPersonnel(parseInt(e.target.value))} />
+            <Style.InputStyle type="text" onChange={(e) => setTeamCount(parseInt(e.target.value))} />
             <Style.BtnStyle onClick={() => onClickNextStep(2)}>다음</Style.BtnStyle>
-        </div>
-        <div style={step === 2 ? {display: "block"} : {display: "none"}} className="fade-up" >    
-            <Style.FadeUp1 $timing={0}>
-                <Style.InputStyle type="text" onChange={(e) => setTeamCount(parseInt(e.target.value))} />
-            </Style.FadeUp1>
-            <Style.FadeUp1 $timing={1}>
-                <Style.BtnStyle onClick={() => onClickNextStep(3)}>다음</Style.BtnStyle>
-            </Style.FadeUp1>
         </div>
         </StepStyle>
     )

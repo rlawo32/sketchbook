@@ -19,7 +19,19 @@ export const FadeUp = styled('div')<{$timing:number}>`
     }
 `;
 
-export const InputStyle = styled('input')`
+export const InputValueStyle = styled('input')`
+    min-heigth: 100px;
+    width: 100px;
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    background: rgba(42,50,73, .68);
+    color: #6cacc5;
+    font-size: 24px;
+`;
+
+export const InputPlayerStyle = styled('input')`
     min-heigth: 100px;
     width: 250px;
     margin: 5px;

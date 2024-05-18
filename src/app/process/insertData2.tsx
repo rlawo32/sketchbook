@@ -96,7 +96,7 @@ const InsertData2 = () => {
                                     </Style.ToolTipStyle>
                                 </Style.FadeUp>
                                 <Style.FadeUp $timing={idx2+1}>
-                                    <Style.InputStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
+                                    <Style.InputPlayerStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
                                                  type="text" id={"input_" + child.id} placeholder="Enter Username" />
                                 </Style.FadeUp>
                                 

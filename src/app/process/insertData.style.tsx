@@ -61,55 +61,12 @@ export const BtnStyle= styled('button')`
 `;
 
 export const CheckStyle = styled('input')`
-    width: 1.8rem;
-    height: 1.8rem;
-    border: 2px solid #999;
-    border-radius: 10px;
-    cursor: pointer;
-    appearance: none;
-
-    transition-property: transform;
-
-    &:hover {
-        transform: scale(1.2);
-
-        + .tooltip {
-            width: 32px;
-            top: -38px;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
-            background: rgba(42,50,113, .9);
-            color: #c97874;
-
-            &::before {
-                left: 35%;
-            }
-        }
-    }
+    display: none;
 
     &:checked {
-        border-color:#34b93d;
-    
-        &::after{
-            height: 25px;
-            -moz-animation: dothabottomcheck .2s ease 0s forwards;
-            -o-animation: dothabottomcheck .2s ease 0s forwards;
-            -webkit-animation: dothabottomcheck .2s ease 0s forwards;
-            animation: dothabottomcheck .2s ease 0s forwards;
-        }
-        
-        &::before{
-            height: 60px;
-            -moz-animation: dothatopcheck .4s ease 0s forwards;
-            -o-animation: dothatopcheck .4s ease 0s forwards;
-            -webkit-animation: dothatopcheck .4s ease 0s forwards;
-            animation: dothatopcheck .4s ease 0s forwards;
-        }
 
         + .check-box {
-            border-color:#34b93d;
+            border-color:#6cacc5;
     
             &::after{
                 height: 25px;
@@ -121,6 +78,7 @@ export const CheckStyle = styled('input')`
             
             &::before{
                 height: 60px;
+                box-shadow: 0 0 0 3px #100a1c;
                 -moz-animation: dothatopcheck .4s ease 0s forwards;
                 -o-animation: dothatopcheck .4s ease 0s forwards;
                 -webkit-animation: dothatopcheck .4s ease 0s forwards;
@@ -159,10 +117,10 @@ export const CheckStyle = styled('input')`
 `;
 
 export const LabelStyle = styled('label')`
-    height: 50px;
-    width: 50px;
+    height: 27px;
+    width: 27px;
     background-color: transparent;
-    border: 10px solid #000;
+    border: 3px solid #231f50;
     border-radius: 5px;
     position: relative;
     display: inline-block;
@@ -175,14 +133,35 @@ export const LabelStyle = styled('label')`
     transition: border-color ease .2s;
     cursor:pointer;
 
+    transition-property: transform;
+
+    &:hover {
+        transform: scale(1.2);
+
+        + .tooltip {
+            width: 32px;
+            top: -38px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+            background: rgba(42,50,113, .9);
+            color: #c97874;
+
+            &::before {
+                left: 35%;
+            }
+        }
+    }
+
     &::before, &::after {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         position: absolute;
         height: 0;
-        width: 10px;
-        background-color: #34b93d;
+        width: 4px;
+        background-color: #6cacc5;
         display: inline-block;
         -moz-transform-origin: left top;
         -ms-transform-origin: left top;
@@ -190,16 +169,15 @@ export const LabelStyle = styled('label')`
         -webkit-transform-origin: left top;
         transform-origin: left top;
         border-radius: 5px;
-        content: ' ';
+        content: '';
         -webkit-transition: opacity ease .5;
         -moz-transition: opacity ease .5;
         transition: opacity ease .5;
     }
 
     &::before {
-        top: 57px;
-        left: 28px;
-        /* box-shadow: 0 0 0 5px #667788; */
+        top: 17px;
+        left: 12px;
         -moz-transform: rotate(-135deg);
         -ms-transform: rotate(-135deg);
         -o-transform: rotate(-135deg);
@@ -208,8 +186,8 @@ export const LabelStyle = styled('label')`
     }
 
     &::after {
-        top: 38px;
-        left: 8px;
+        top: 7px;
+        left: 1px;
         -moz-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
         -o-transform: rotate(-45deg);
@@ -217,52 +195,32 @@ export const LabelStyle = styled('label')`
         transform: rotate(-45deg);
     }
 
-    .checked {
-        border-color:#34b93d;
-    
-        &::after{
-            height: 25px;
-            -moz-animation: dothabottomcheck .2s ease 0s forwards;
-            -o-animation: dothabottomcheck .2s ease 0s forwards;
-            -webkit-animation: dothabottomcheck .2s ease 0s forwards;
-            animation: dothabottomcheck .2s ease 0s forwards;
-        }
-        
-        &::before{
-            height: 60px;
-            -moz-animation: dothatopcheck .4s ease 0s forwards;
-            -o-animation: dothatopcheck .4s ease 0s forwards;
-            -webkit-animation: dothatopcheck .4s ease 0s forwards;
-            animation: dothatopcheck .4s ease 0s forwards;
-        }
-    }
-
     @-moz-keyframes dothabottomcheck{
       0% { height: 0; }
-      100% { height: 24px; }
+      100% { height: 14px; }
     } 
     @-webkit-keyframes dothabottomcheck{
       0% { height: 0; }
-      100% { height: 24px; }
+      100% { height: 14px; }
     }
     @keyframes dothabottomcheck{
       0% { height: 0; }
-      100% { height: 24px;  }
+      100% { height: 14px;  }
     }
     @keyframes dothatopcheck{
       0% { height: 0; }
       50% { height: 0; }
-      100% { height: 50px; }
+      100% { height: 25px; }
     }
     @-webkit-keyframes dothatopcheck{
       0% { height: 0; }
       50% { height: 0; }
-      100% { height: 50px; }
+      100% { height: 25px; }
     }
     @-moz-keyframes dothatopcheck{
       0% { height: 0; }
       50% { height: 0; }
-      100% { height: 50px; }
+      100% { height: 25px; }
     }
 `;
 

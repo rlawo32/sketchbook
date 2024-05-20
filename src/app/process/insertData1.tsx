@@ -9,7 +9,8 @@ import {createTeams} from "./jotaiActions"
 
 
 const StepStyle = styled('div')<{$step:number}>`
-    display: ${({$step}) => $step > 1 ? "none" : "block"};   
+    display: ${({$step}) => $step > 1 ? "none" : "block"}; 
+    height: 250px; 
 `;
 
 const InsertData1 = () => {
@@ -27,8 +28,8 @@ const InsertData1 = () => {
 
     return (
         <StepStyle $step={step}>
-            <Style.InputValueStyle type="text" onChange={(e) => setPersonnel(parseInt(e.target.value))} />
-            <Style.InputValueStyle type="text" onChange={(e) => setTeamCount(parseInt(e.target.value))} />
+            <Style.InputValueStyle type="number" onChange={(e) => setPersonnel(parseInt(e.target.value))} placeholder="총 인원"/>
+            <Style.InputValueStyle type="number" onChange={(e) => setTeamCount(parseInt(e.target.value))} placeholder="팀 수"/>
             <Style.BtnStyle onClick={() => onClickNextStep(2)}>다음</Style.BtnStyle>
         </StepStyle>
     )

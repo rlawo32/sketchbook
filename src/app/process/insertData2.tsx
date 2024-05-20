@@ -15,7 +15,7 @@ const StepStyle = styled('div')<{$step:number}>`
     display: ${({$step}) => $step > 1 ? "block" : "none"};
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 300px;
     
     .list_section {
         display: flex;
@@ -33,7 +33,7 @@ const StepStyle = styled('div')<{$step:number}>`
     .btn_section {
         display: flex;
         width: 250px;
-        margin: 20px auto;
+        margin: 50px auto;
     }
 `;
 
@@ -98,7 +98,7 @@ const InsertData2 = () => {
                                     </Style.FadeUp>
                                     <Style.FadeUp $timing={idx2+1}>
                                         <Style.InputPlayerStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
-                                                     type="text" id={"input_" + child.id} placeholder="Enter Username" />
+                                                     type="text" id={"input_" + child.id} placeholder="이름 입력" />
                                     </Style.FadeUp>
                                     
                                     <Style.FadeUp $timing={idx2+2}>

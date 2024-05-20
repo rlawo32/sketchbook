@@ -22,25 +22,50 @@ export const FadeUp = styled('div')<{$timing:number}>`
 export const InputValueStyle = styled('input')`
     min-heigth: 100px;
     width: 100px;
-    margin: 5px;
-    padding: 10px 20px;
+    margin: 5px 10px 40px;
+    padding: 14px 0 13px 20px;
     border: none;
     border-radius: 15px;
     background: rgba(42,50,73, .68);
     color: #6cacc5;
     font-size: 24px;
+
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &:focus {
+        outline: 2px solid #6cacc5;
+    }
+
+    &::placeholder {
+        color: gray;
+        font-size: 17px;
+        opacity: 0.7;
+    }
 `;
 
 export const InputPlayerStyle = styled('input')`
     min-heigth: 100px;
     width: 250px;
-    margin: 5px;
+    margin: 10px 5px;
     padding: 10px 20px;
     border: none;
     border-radius: 15px;
     background: rgba(42,50,73, .68);
     color: #6cacc5;
     font-size: 24px;
+
+    &:focus {
+        outline: 2px solid #6cacc5;
+    }
+
+    &::placeholder {
+        color: gray;
+        font-size: 18px;
+        opacity: 0.7;
+    }
 `;
 
 export const BtnStyle= styled('button')`
@@ -119,6 +144,7 @@ export const CheckStyle = styled('input')`
 export const LabelStyle = styled('label')`
     height: 27px;
     width: 27px;
+    margin: 3px 0 0 0;
     background-color: transparent;
     border: 3px solid #231f50;
     border-radius: 5px;
@@ -232,6 +258,10 @@ export const SelectStyle = styled('select')`
     color: #6cacc5;
     font-size: 18px;
     cursor: pointer;
+        
+    &:focus {
+        outline: 2px solid #6cacc5;
+    }
 
     &:hover {
         + .tooltip {

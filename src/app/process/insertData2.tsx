@@ -13,7 +13,6 @@ import {
 
 const StepStyle = styled('div')<{$step:number}>`
     display: ${({$step}) => $step > 1 ? "block" : "none"};
-    height: 500px;
     align-items: center;
     justify-content: center;
     

@@ -32,8 +32,13 @@ const StepStyle = styled('div')<{$step:number}>`
 
     .btn_section {
         display: flex;
+        flex-wrap: wrap;
         width: 250px;
         margin: 50px auto;
+
+        .btn_footer {
+            margin: auto;
+        }
     }
 `;
 
@@ -121,6 +126,11 @@ const InsertData2 = () => {
                     <Style.FadeUp $timing={1}>
                         <Style.BtnStyle onClick={() => onClickBalance()}>밸런스</Style.BtnStyle>
                     </Style.FadeUp>
+                    <div className="btn_footer">
+                        <Style.FadeUp $timing={2}>
+                            <Style.BtnStyle onClick={() => window.location.reload()}>처음으로</Style.BtnStyle>
+                        </Style.FadeUp>
+                    </div>
                 </div>
             </div>
         </StepStyle>

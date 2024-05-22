@@ -19,6 +19,8 @@ const StepStyle = styled('div')<{$step:number}>`
     
     .list_section {
         display: flex;
+        flex-wrap: wrap;
+        width: 600px;
 
         .list_parent {
             margin: 0 30px;

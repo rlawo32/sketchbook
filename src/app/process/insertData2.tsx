@@ -1,4 +1,3 @@
-
 'use client';
 
 import styled from "styled-components";
@@ -11,7 +10,7 @@ import {
     updateCheckData, activeRandom, activeBalance
 } from "./jotaiActions"
 
-const StepStyle = styled('div')<{$step:number}>`
+const StepStyle = styled('div')<{$step:number; $team:number;}>`
     display: ${({$step}) => $step > 1 ? "block" : "none"};
     align-items: center;
     justify-content: center;
@@ -21,12 +20,14 @@ const StepStyle = styled('div')<{$step:number}>`
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        width: ${({$team}) => $team * 400}px;
         max-width: 1200px;
-        min-width: 800px;   
+        min-width: 800px;
 
         .list_parent {
             display: block;
             width: 330px;
+            margin: 50px 0 0;
 
             .list_child {
                 display: flex;
@@ -91,7 +92,7 @@ const InsertData2 = () => {
     }
 
     return (
-        <StepStyle $step={step} >
+        <StepStyle $step={step} $team={teams.length}>
             <div>
                 <div className="list_section">
                     {teams.map((parent, idx1) => (

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const FadeUp = styled('div')<{$timing:number}>`
-    display: inline-block;
+    position: relative;
+    display: flex;
+    align-items: center;
     margin: auto;
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
@@ -16,6 +18,18 @@ export const FadeUp = styled('div')<{$timing:number}>`
             transform: none;
             opacity: 1;
         }
+    }
+
+    .list_select {
+        position: absolute;
+        top: 13px;
+        left: 15px;
+    }
+
+    .list_check {
+        position: absolute;
+        top: 17px;
+        right: 15px;
     }
 `;
 
@@ -48,9 +62,9 @@ export const InputValueStyle = styled('input')`
 
 export const InputPlayerStyle = styled('input')`
     min-heigth: 100px;
-    width: 250px;
+    width: 300px;
     margin: 10px 5px;
-    padding: 10px 20px;
+    padding: 10px 55px 10px 70px;
     border: none;
     border-radius: 15px;
     background: rgba(42,50,73, .68);
@@ -103,7 +117,7 @@ export const CheckStyle = styled('input')`
             
             &::before{
                 height: 60px;
-                box-shadow: 0 0 0 3px #100a1c;
+                box-shadow: 0 0 0 3px rgba(42,50,73, .7);
                 -moz-animation: dothatopcheck .4s ease 0s forwards;
                 -o-animation: dothatopcheck .4s ease 0s forwards;
                 -webkit-animation: dothatopcheck .4s ease 0s forwards;
@@ -142,11 +156,12 @@ export const CheckStyle = styled('input')`
 `;
 
 export const LabelStyle = styled('label')`
+    display: inline-block;
     height: 27px;
     width: 27px;
     margin: 3px 0 0 0;
     background-color: transparent;
-    border: 3px solid #231f50;
+    border: 2px solid #6cacc5;
     border-radius: 5px;
     position: relative;
     display: inline-block;

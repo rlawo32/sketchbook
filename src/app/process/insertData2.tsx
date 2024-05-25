@@ -1,6 +1,7 @@
 
 'use client';
 
+import Image from "next/image";
 import styled from "styled-components";
 import * as Style from "./insertData.style";
 
@@ -122,6 +123,11 @@ const InsertData2 = () => {
                                     </Style.FadeUp>
                                 </div>
                             ))}
+                            <Style.FadeUp $timing={parent.length+5}>
+                                <Style.VsStyle>
+                                    {idx1 > 0 ? <Image src={"/images/vs_image.png"} alt={"VS"} height={120} width={120}/> : <></>}
+                                </Style.VsStyle>
+                            </Style.FadeUp>
                         </div>
                     ))}
                 </div>

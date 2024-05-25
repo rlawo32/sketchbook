@@ -7,7 +7,7 @@ export const FadeUp = styled('div')<{$timing:number}>`
     margin: auto;
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
-    animation-delay: .${({$timing}) => $timing+1}s;
+    animation-delay: ${({$timing}) => $timing+1 < 10 ? '.'+ $timing+1 +'s' : 1 + '.' + $timing+1 + 's'};
 
     @keyframes fade-up {
         from {
@@ -323,4 +323,10 @@ export const ToolTipStyle = styled('div')`
         transform: translate(-50%) rotate(45deg);
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
+`;
+
+export const VsStyle = styled('div')`
+    position: absolute;
+    top: -130px;
+    left: -130px;
 `;

@@ -34,9 +34,9 @@ export const FadeUp = styled('div')<{$timing:number}>`
 
     .list_image {
         position: absolute;
-        top: 40%;
-        left: -55px;
-        transform: translateY(-40%);
+        top: 35%;
+        left: 11px;
+        transform: translateY(-35%);
     }
 `;
 

@@ -98,37 +98,39 @@ const InsertData2 = () => {
             <div>
                 <div className="list_section">
                     {teams.map((parent, idx1) => (
-                        <div key={idx1} className="list_parent">
-                            {parent.map((child, idx2) => (
-                                <div key={idx2} className="list_child">
-                                    <Style.FadeUp $timing={idx2}>
-                                        <div className="list_select">
-                                            <Style.SelectStyle onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)})} value={child.lv}>
-                                                {onActiveSelectBox()}
-                                            </Style.SelectStyle>    
-                                            <Style.ToolTipStyle className="tooltip">
-                                                Level
-                                            </Style.ToolTipStyle>
+                        <>
+                            <div key={idx1} className="list_parent">
+                                {parent.map((child, idx2) => (
+                                    <>
+                                        <div key={idx2} className="list_child">
+                                            <Style.FadeUp $timing={idx2}>
+                                                <div className="list_select">
+                                                    <Style.SelectStyle onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)})} value={child.lv}>
+                                                        {onActiveSelectBox()}
+                                                    </Style.SelectStyle>    
+                                                    <Style.ToolTipStyle className="tooltip">
+                                                        Level
+                                                    </Style.ToolTipStyle>
+                                                </div>
+                                                <Style.InputPlayerStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
+                                                            type="text" id={"input_" + child.id} placeholder="이름 입력" />
+                                                <div className="list_check">
+                                                    <Style.CheckStyle onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
+                                                                checked={checkData.some(data => data.id === child.id) ? true : false} type="checkbox" id={"chkbx" + child.id} />
+                                                    <Style.LabelStyle htmlFor={"chkbx" + child.id} className="check-box" />
+                                                    <Style.ToolTipStyle className="tooltip">
+                                                        Fix
+                                                    </Style.ToolTipStyle>
+                                                </div>
+                                            </Style.FadeUp>
                                         </div>
-                                        <Style.InputPlayerStyle onChange={(e) => setInputData({index:child.id, arrNo:idx1, value:e.target.value})} value={child.nm} 
-                                                     type="text" id={"input_" + child.id} placeholder="이름 입력" />
-                                        <div className="list_check">
-                                            <Style.CheckStyle onChange={(e) => setCheckData({checked:e.target.checked, index:child.id, arrNo:idx1, value:idx2})} 
-                                                        checked={checkData.some(data => data.id === child.id) ? true : false} type="checkbox" id={"chkbx" + child.id} />
-                                            <Style.LabelStyle htmlFor={"chkbx" + child.id} className="check-box" />
-                                            <Style.ToolTipStyle className="tooltip">
-                                                Fix
-                                            </Style.ToolTipStyle>
-                                        </div>
-                                    </Style.FadeUp>
-                                </div>
-                            ))}
-                            <Style.FadeUp $timing={parent.length+5}>
-                                <Style.VsStyle>
-                                    {idx1 > 0 ? <Image src={"/images/vs_image.png"} alt={"VS"} height={120} width={120}/> : <></>}
-                                </Style.VsStyle>
+                                    </>
+                                ))}
+                            </div>
+                            <Style.FadeUp $timing={parent.length+5} style={idx1 < teams.length-1 ? {display: "inline-block"} : {display: "none"}}>
+                                <Image src={"/images/vs_image.png"} alt={"VS"} height={120} width={120} className="list_image" />
                             </Style.FadeUp>
-                        </div>
+                        </>
                     ))}
                 </div>
                 <div className="btn_section">

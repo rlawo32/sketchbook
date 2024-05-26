@@ -31,6 +31,13 @@ export const FadeUp = styled('div')<{$timing:number}>`
         top: 17px;
         right: 15px;
     }
+
+    .list_image {
+        position: absolute;
+        top: 40%;
+        left: -55px;
+        transform: translateY(-40%);
+    }
 `;
 
 export const InputValueStyle = styled('input')`
@@ -323,10 +330,4 @@ export const ToolTipStyle = styled('div')`
         transform: translate(-50%) rotate(45deg);
         transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-`;
-
-export const VsStyle = styled('div')`
-    position: absolute;
-    top: -130px;
-    left: -130px;
 `;

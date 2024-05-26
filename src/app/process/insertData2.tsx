@@ -107,7 +107,7 @@ const InsertData2 = () => {
                             <div className="list_parent">
                                 {parent.map((child, idx2) => (
                                     <div key={idx2} className="list_child">
-                                        <Style.FadeUp $timing={idx2}>
+                                        <Style.FadeUp $timing={idx2} $team={teams.length}>
                                             <div className="list_select">
                                                 <Style.SelectStyle onChange={(e) => setSelectData({index:child.id, arrNo:idx1, value:parseInt(e.target.value)})} value={child.lv}>
                                                     {onActiveSelectBox()}
@@ -130,21 +130,22 @@ const InsertData2 = () => {
                                     </div>
                                 ))}
                             </div>
-                            <Style.FadeUp $timing={parent.length+5} style={idx1 < teams.length-1 ? {display: "inline-block"} : {display: "none"}}>
+                            <Style.FadeUp $timing={parent.length+5}  $team={teams.length}
+                                          style={idx1 < teams.length-1 ? {display: "inline-block"} : {display: "none"}}>
                                 <Image src={"/images/vs_image.png"} alt={"VS"} height={120} width={120} className="list_image" />
                             </Style.FadeUp>
                         </div>
                     ))}
                 </div>
                 <div className="btn_section">
-                    <Style.FadeUp $timing={0}>
+                    <Style.FadeUp $timing={0} $team={teams.length}>
                         <Style.BtnStyle onClick={() => onClickRandom()}>무작위</Style.BtnStyle>
                     </Style.FadeUp>
-                    <Style.FadeUp $timing={1}>
+                    <Style.FadeUp $timing={1} $team={teams.length}>
                         <Style.BtnStyle onClick={() => onClickBalance()}>밸런스</Style.BtnStyle>
                     </Style.FadeUp>
                     <div className="btn_footer">
-                        <Style.FadeUp $timing={2}>
+                        <Style.FadeUp $timing={2} $team={teams.length}>
                             <Style.BtnStyle onClick={() => window.location.reload()}>처음으로</Style.BtnStyle>
                         </Style.FadeUp>
                     </div>

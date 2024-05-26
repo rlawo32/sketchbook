@@ -27,11 +27,13 @@ const InsertData1 = () => {
     }
 
     const onClickNextStep = (next:number):void => {
-        if(teamCountData < 1) {
+        if(personnelData < 1) {
+            alert('인원수를 입력해주세요.');
+        } else if(teamCountData < 1) {
             alert('팀수를 입력해주세요.');
         } else {
             if(personnelData < teamCountData) {
-                alert('인원수를 입력해주세요.');
+                alert('인원수를 팀수보다 많이 입력해주세요.');
             } else {
                 setStep(next);
                 if(next === 2) {

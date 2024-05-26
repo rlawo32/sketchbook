@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FadeUp = styled('div')<{$timing:number}>`
+export const FadeUp = styled('div')<{$timing:number; $team:number;}>`
     position: relative;
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@ export const FadeUp = styled('div')<{$timing:number}>`
     .list_image {
         position: absolute;
         top: 35%;
-        left: 11px;
+        left: ${({$team}) => $team > 2 ? -10 : 10}px;
         transform: translateY(-35%);
     }
 `;

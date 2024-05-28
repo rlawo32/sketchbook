@@ -56,7 +56,7 @@ const StepStyle = styled('div')<{$step:number; $team:number;}>`
 `;
 
 const InsertData2 = () => {
-    const [step, setStep] = useAtom(processStep);
+    const [step] = useAtom(processStep);
     const [, setInputData] = useAtom(updateInputData);
     const [, setSelectData] = useAtom(updateSelectData);
     const [checkData, setCheckData] = useAtom(updateCheckData);

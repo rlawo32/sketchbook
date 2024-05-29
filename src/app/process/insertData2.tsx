@@ -103,7 +103,7 @@ const InsertData2 = () => {
             <div>
                 <div className="list_section">
                     {teams.map((parent, idx1) => (
-                        <div key={idx1} className="list_wrap">
+                        <div key={idx1} className="list_wrap" id={parent.length + "_t"}>
                             <div className="list_parent">
                                 {parent.map((child, idx2) => (
                                     <div key={idx2} className="list_child">
@@ -130,7 +130,7 @@ const InsertData2 = () => {
                                     </div>
                                 ))}
                             </div>
-                            <Style.FadeUp $timing={parent.length+5}  $team={teams.length}
+                            <Style.FadeUp $timing={parent.length+5} $team={teams.length}
                                           style={idx1 < teams.length-1 ? {display: "inline-block"} : {display: "none"}}>
                                 <Image src={"/images/vs_image.png"} alt={"VS"} height={120} width={120} className="list_image" />
                             </Style.FadeUp>

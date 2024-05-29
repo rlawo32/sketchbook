@@ -26,6 +26,13 @@ const InsertData1 = () => {
         }
     }
 
+    const handleQuickCreate = (type:number):void => {
+        setPersonnelData(type);
+        setTeamCountData(2);
+        setStep(2);
+        setCreateTeams();
+    }
+
     const onClickNextStep = (next:number):void => {
         if(personnelData < 1) {
             alert('인원수를 입력해주세요.');
@@ -45,6 +52,13 @@ const InsertData1 = () => {
 
     return (
         <StepStyle $step={step}>
+            <div>
+                <button onClick={() => handleQuickCreate(10)}>5대5</button>
+                <button onClick={() => handleQuickCreate(8)}>4대4</button>
+                <button onClick={() => handleQuickCreate(6)}>3대3</button>
+                <button onClick={() => handleQuickCreate(4)}>2대2</button>
+                <button onClick={() => handleQuickCreate(2)}>1대1</button>
+            </div>
             <Style.InputValueStyle type="number" onChange={(e) => setPersonnelData(parseInt(e.target.value))} 
                                    placeholder="총 인원" onKeyDown={(e) => handleEnterEvent(e)}/>
             <Style.InputValueStyle type="number" onChange={(e) => setTeamCountData(parseInt(e.target.value))} 

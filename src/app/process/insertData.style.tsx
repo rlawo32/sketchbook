@@ -7,7 +7,7 @@ export const FadeUp = styled('div')<{$timing:number; $team:number;}>`
     margin: auto;
     opacity: 0;
     animation: fade-up .8s forwards cubic-bezier(.6, 1.5, .8, 1.2);
-    animation-delay: ${({$timing}) => $timing+1 < 10 ? '.'+ $timing+1 +'s' : 1 + '.' + $timing+1 + 's'};
+    animation-delay: ${({$timing}) => $timing+1 < 11 ? '.'+ $timing+1 +'s' : 1 + '.' + $timing+1 + 's'};
 
     @keyframes fade-up {
         from {

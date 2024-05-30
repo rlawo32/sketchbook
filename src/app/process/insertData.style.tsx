@@ -90,21 +90,25 @@ export const InputPlayerStyle = styled('input')`
 `;
 
 export const BtnStyle= styled('button')`
+    flex: 1 1 auto;
     display: block;
     margin: 10px auto;
     padding: 5px 25px;
     border: none;
     border-radius: 10px;
     box-shadow: 0 0 40px rgba(42,50,113, .68);
-    background-image: linear-gradient(to right, rgba(42,50,113) 0%, rgba(42,50,73, .88) 51%, rgba(42,50,113) 100%);
+    background-size: 200% auto;
+    background-image: linear-gradient(to right, rgba(42,50,113) 0%, rgba(42,50,73, .88) 81%, rgba(42,50,113) 100%);
     color: #6cacc5;
     font-size: 18px;
     cursor: pointer;
+    transition: 0.5s;
     transition-duration: .3s;
 
     &:hover {
         transform: scale(1.1);
         box-shadow: 0 0 20px rgba(42,50,113, .68);
+        background-position: right center;
     }
 `;
 

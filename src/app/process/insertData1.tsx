@@ -10,8 +10,14 @@ import React from "react";
 
 
 const StepStyle = styled('div')<{$step:number}>`
-    display: ${({$step}) => $step > 1 ? "none" : "block"}; 
+    display: ${({$step}) => $step > 1 ? "none" : "block"};
     height: 250px; 
+
+    .input_section {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0 30px;
+    }
 `;
 
 const InsertData1 = () => {
@@ -52,17 +58,19 @@ const InsertData1 = () => {
 
     return (
         <StepStyle $step={step}>
-            <div>
-                <button onClick={() => handleQuickCreate(10)}>5대5</button>
-                <button onClick={() => handleQuickCreate(8)}>4대4</button>
-                <button onClick={() => handleQuickCreate(6)}>3대3</button>
-                <button onClick={() => handleQuickCreate(4)}>2대2</button>
-                <button onClick={() => handleQuickCreate(2)}>1대1</button>
+            <div className="quick_section">
+                <Style.QuickBtnStyle onClick={() => handleQuickCreate(10)}>5 vs</Style.QuickBtnStyle>
+                <Style.QuickBtnStyle onClick={() => handleQuickCreate(8)}>4 vs</Style.QuickBtnStyle>
+                <Style.QuickBtnStyle onClick={() => handleQuickCreate(6)}>3 vs</Style.QuickBtnStyle>
+                <Style.QuickBtnStyle onClick={() => handleQuickCreate(4)}>2 vs</Style.QuickBtnStyle>
+                <Style.QuickBtnStyle onClick={() => handleQuickCreate(2)}>1 vs</Style.QuickBtnStyle>
             </div>
-            <Style.InputValueStyle type="number" onChange={(e) => setPersonnelData(parseInt(e.target.value))} 
-                                   placeholder="총 인원" onKeyDown={(e) => handleEnterEvent(e)}/>
-            <Style.InputValueStyle type="number" onChange={(e) => setTeamCountData(parseInt(e.target.value))} 
-                                   placeholder="팀 수" onKeyDown={(e) => handleEnterEvent(e)}/>
+            <div className="input_section">
+                <Style.InputValueStyle type="number" onChange={(e) => setPersonnelData(parseInt(e.target.value))} 
+                                    placeholder="총 인원" onKeyDown={(e) => handleEnterEvent(e)}/>
+                <Style.InputValueStyle type="number" onChange={(e) => setTeamCountData(parseInt(e.target.value))} 
+                                    placeholder="팀 수" onKeyDown={(e) => handleEnterEvent(e)}/>
+            </div>
             <Style.BtnStyle onClick={() => onClickNextStep(2)}>다음</Style.BtnStyle>
         </StepStyle>
     )

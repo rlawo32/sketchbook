@@ -43,7 +43,7 @@ export const FadeUp = styled('div')<{$timing:number; $team:number;}>`
 export const InputValueStyle = styled('input')`
     min-heigth: 100px;
     width: 100px;
-    margin: 5px 10px 40px;
+    margin: 20px 10px;
     padding: 14px 0 13px 20px;
     border: none;
     border-radius: 15px;
@@ -95,7 +95,8 @@ export const BtnStyle= styled('button')`
     padding: 5px 25px;
     border: none;
     border-radius: 10px;
-    background: rgba(42,50,113, .68);
+    box-shadow: 0 0 40px rgba(42,50,113, .68);
+    background-image: linear-gradient(to right, rgba(42,50,113) 0%, rgba(42,50,73, .88) 51%, rgba(42,50,113) 100%);
     color: #6cacc5;
     font-size: 18px;
     cursor: pointer;
@@ -103,6 +104,25 @@ export const BtnStyle= styled('button')`
 
     &:hover {
         transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(42,50,113, .68);
+    }
+`;
+
+export const QuickBtnStyle = styled('button')`
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #6cacc5;
+    box-shadow: 0 0 40px rgba(42,50,113, .68);
+    border: none;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgba(42,50,113) 0%, rgba(42,50,73, .88) 51%, rgba(42,50,113) 100%);
+    cursor: pointer;
+    &:hover {
+        background-position: right center;
     }
 `;
 

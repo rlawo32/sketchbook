@@ -15,7 +15,7 @@ const StepStyle = styled('div')<{$step:number}>`
 
     
     .quick_section {
-        margin: 0 0 50px;
+        margin: 0 0 30px;
 
         .quick_title {
             margin: 0 0 10px;

@@ -11,14 +11,44 @@ import {
     updateInputData, updateSelectData, 
     updateCheckData, activeRandom, activeBalance
 } from "./jotaiActions"
+import { useRef } from "react";
 
 const StepStyle = styled('div')<{$step:number; $team:number;}>`
     display: ${({$step}) => $step > 1 ? "block" : "none"};
     align-items: center;
     justify-content: center;
     height: 100%;
+
+    .gate_section {
+        position: absolute;
+        height: 100%;
+        width: 50%;
+        background: silver;
+        opacity: 0;
+        transition: all .8s cubic-bezier(0.95, 0.25, 0.25, 1.25);
+        z-index: 5;
+
+        &.gate_left {
+            left: -50%;
+
+            &.gate_close {
+                opacity: 1;
+                transform: translateX(100%);
+            }
+        }
+
+        &.gate_right {
+            right: -50%;
+
+            &.gate_close {
+                opacity: 1;
+                transform: translateX(-100%);
+            }
+        }
+    }
     
     .list_section {
+        position: relative;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
@@ -56,6 +86,9 @@ const StepStyle = styled('div')<{$step:number; $team:number;}>`
 `;
 
 const InsertData2 = () => {
+    const gateLeftRef:any = useRef<any>();
+    const gateRightRef:any = useRef<any>();
+
     const [step] = useAtom(processStep);
     const [, setInputData] = useAtom(updateInputData);
     const [, setSelectData] = useAtom(updateSelectData);
@@ -77,17 +110,25 @@ const InsertData2 = () => {
     }
     
     const onClickRandom = () => {
+        gateLeftRef.current.className += " gate_close";
+        gateRightRef.current.className += " gate_close";
+
         let tmp:number = 5000;
         let interval = setInterval(() => {
             setRandomData();    
             tmp -= 200;
             if(tmp === 0) {
                 clearInterval(interval);
+                gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
+                gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
             }
         }, 200);
     }
 
     const onClickBalance = () => {
+        gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
+        gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
+
         let tmp:number = 5000;
         let interval = setInterval(() => {
             setBalanceData();    
@@ -102,6 +143,8 @@ const InsertData2 = () => {
         <StepStyle $step={step} $team={teams.length}>
             <div>
                 <div className="list_section">
+                    <div className="gate_section gate_left" ref={gateLeftRef}></div>
+                    <div className="gate_section gate_right" ref={gateRightRef}></div>
                     {teams.map((parent, idx1) => (
                         <div key={idx1} className="list_wrap" id={parent.length + "_t"}>
                             <div className="list_parent">

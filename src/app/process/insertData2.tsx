@@ -22,14 +22,14 @@ const StepStyle = styled('div')<{$step:number; $team:number;}>`
     .gate_section {
         position: absolute;
         height: 100%;
-        width: 50%;
         background: silver;
         opacity: 0;
         transition: all .8s cubic-bezier(0.95, 0.25, 0.25, 1.25);
-        z-index: 5;
 
         &.gate_left {
             left: -50%;
+            width: 50%;
+            z-index: 5;
 
             &.gate_close {
                 opacity: 1;
@@ -39,6 +39,8 @@ const StepStyle = styled('div')<{$step:number; $team:number;}>`
 
         &.gate_right {
             right: -50%;
+            width: 50%;
+            z-index: 5;
 
             &.gate_close {
                 opacity: 1;
@@ -143,8 +145,9 @@ const InsertData2 = () => {
         <StepStyle $step={step} $team={teams.length}>
             <div>
                 <div className="list_section">
-                    <div className="gate_section gate_left" ref={gateLeftRef}></div>
-                    <div className="gate_section gate_right" ref={gateRightRef}></div>
+                    <div className="gate_section gate_left" ref={gateLeftRef} />
+                    <div className="gate_section gate_right" ref={gateRightRef} />
+                    <div className="gate_section gate_load" />
                     {teams.map((parent, idx1) => (
                         <div key={idx1} className="list_wrap" id={parent.length + "_t"}>
                             <div className="list_parent">

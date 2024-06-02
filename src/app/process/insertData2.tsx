@@ -117,6 +117,9 @@ const InsertData2 = () => {
 
     const teams = useAtomValue(produceTeam);
 
+    const shuffleTime:number = 3000;
+    const decrease:number = 150;
+
     const onActiveSelectBox = ():any[] => {
         const list:any[] = [];
         const textBox:string[] = ["E", "D", "C", "B", "A"];
@@ -134,32 +137,32 @@ const InsertData2 = () => {
         btnSecRef.current.className += " btn_visible";
         setShCount(shCount+1);
 
-        let tmp:number = 5000;
+        let intervalTime:number = shuffleTime;
         let interval = setInterval(() => {
             setRandomData();    
-            tmp -= 200;
-            if(tmp === 0) {
+            intervalTime -= decrease;
+            if(intervalTime === 0) {
                 clearInterval(interval);
                 // gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
                 // gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
                 btnSecRef.current.className = btnSecRef.current.className.replace(' btn_visible', '');
             }
-        }, 200);
+        }, decrease);
     }
 
     const onClickBalance = () => {
         btnSecRef.current.className += " btn_visible";
         setShCount(shCount+1);
 
-        let tmp:number = 5000;
+        let intervalTime:number = shuffleTime;
         let interval = setInterval(() => {
             setBalanceData();    
-            tmp -= 200;
-            if(tmp === 0) {
+            intervalTime -= decrease;
+            if(intervalTime === 0) {
                 clearInterval(interval);
                 btnSecRef.current.className = btnSecRef.current.className.replace(' btn_visible', '');
             }
-        }, 200);
+        }, decrease);
     }
 
     return (

@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 
+export const shuffleCount = atom<number>(0);                                    // 섞은 횟수
 export const processStep = atom<number>(1);                                     // 프로세스 진행
 export const personnel = atom<number>(0);                                       // 입력된 총 인원
 export const teamCount = atom<number>(0);                                       // 입력된 팀 수

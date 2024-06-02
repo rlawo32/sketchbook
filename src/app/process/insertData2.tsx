@@ -6,7 +6,7 @@ import styled from "styled-components";
 import * as Style from "./insertData.style";
 
 import {useAtom, useAtomValue} from "jotai";
-import {processStep, produceTeam} from "./jotaiAtoms";
+import {processStep, produceTeam, shuffleCount} from "./jotaiAtoms";
 import {
     updateInputData, updateSelectData, 
     updateCheckData, activeRandom, activeBalance
@@ -75,11 +75,20 @@ const StepStyle = styled('div')<{$step:number; $team:number;}>`
         }
     }
 
+    .info_section {
+        width: 50px;
+        margin: 30px auto;
+        color: #6cacc5;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
     .btn_section {
         display: flex;
         flex-wrap: wrap;
         width: 250px;
-        margin: 50px auto;
+        margin: auto;
         opacity: 1;
         transition: opacity .8s ease;
 
@@ -98,6 +107,7 @@ const InsertData2 = () => {
     // const gateRightRef:any = useRef<any>();
     const btnSecRef:any = useRef<any>();
 
+    const [shCount, setShCount] = useAtom(shuffleCount);
     const [step] = useAtom(processStep);
     const [, setInputData] = useAtom(updateInputData);
     const [, setSelectData] = useAtom(updateSelectData);
@@ -122,6 +132,7 @@ const InsertData2 = () => {
         // gateLeftRef.current.className += " gate_close";
         // gateRightRef.current.className += " gate_close";
         btnSecRef.current.className += " btn_visible";
+        setShCount(shCount+1);
 
         let tmp:number = 5000;
         let interval = setInterval(() => {
@@ -137,9 +148,8 @@ const InsertData2 = () => {
     }
 
     const onClickBalance = () => {
-        // gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
-        // gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
         btnSecRef.current.className += " btn_visible";
+        setShCount(shCount+1);
 
         let tmp:number = 5000;
         let interval = setInterval(() => {
@@ -193,9 +203,11 @@ const InsertData2 = () => {
                         </div>
                     ))}
                 </div>
-                <div className="info_section">
-                    
-                </div>
+                <Style.FadeUp $timing={0} $team={teams.length}>
+                    <div className="info_section">
+                        {shCount}
+                    </div>
+                </Style.FadeUp>
                 <div className="btn_section" ref={btnSecRef}>
                     <Style.FadeUp $timing={0} $team={teams.length}>
                         <Style.BtnStyle onClick={() => onClickRandom()}>무작위</Style.BtnStyle>

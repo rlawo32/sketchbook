@@ -80,16 +80,23 @@ const StepStyle = styled('div')<{$step:number; $team:number;}>`
         flex-wrap: wrap;
         width: 250px;
         margin: 50px auto;
+        opacity: 1;
+        transition: opacity .8s ease;
 
         .btn_footer {
             margin: auto;
+        }
+
+        &.btn_visible {
+            opacity: 0;
         }
     }
 `;
 
 const InsertData2 = () => {
-    const gateLeftRef:any = useRef<any>();
-    const gateRightRef:any = useRef<any>();
+    // const gateLeftRef:any = useRef<any>();
+    // const gateRightRef:any = useRef<any>();
+    const btnSecRef:any = useRef<any>();
 
     const [step] = useAtom(processStep);
     const [, setInputData] = useAtom(updateInputData);
@@ -112,8 +119,9 @@ const InsertData2 = () => {
     }
     
     const onClickRandom = () => {
-        gateLeftRef.current.className += " gate_close";
-        gateRightRef.current.className += " gate_close";
+        // gateLeftRef.current.className += " gate_close";
+        // gateRightRef.current.className += " gate_close";
+        btnSecRef.current.className += " btn_visible";
 
         let tmp:number = 5000;
         let interval = setInterval(() => {
@@ -121,15 +129,17 @@ const InsertData2 = () => {
             tmp -= 200;
             if(tmp === 0) {
                 clearInterval(interval);
-                gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
-                gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
+                // gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
+                // gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
+                btnSecRef.current.className = btnSecRef.current.className.replace(' btn_visible', '');
             }
         }, 200);
     }
 
     const onClickBalance = () => {
-        gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
-        gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
+        // gateLeftRef.current.className = gateLeftRef.current.className.replace(' gate_close', '');
+        // gateRightRef.current.className = gateRightRef.current.className.replace(' gate_close', '');
+        btnSecRef.current.className += " btn_visible";
 
         let tmp:number = 5000;
         let interval = setInterval(() => {
@@ -137,6 +147,7 @@ const InsertData2 = () => {
             tmp -= 200;
             if(tmp === 0) {
                 clearInterval(interval);
+                btnSecRef.current.className = btnSecRef.current.className.replace(' btn_visible', '');
             }
         }, 200);
     }
@@ -145,9 +156,8 @@ const InsertData2 = () => {
         <StepStyle $step={step} $team={teams.length}>
             <div>
                 <div className="list_section">
-                    <div className="gate_section gate_left" ref={gateLeftRef} />
-                    <div className="gate_section gate_right" ref={gateRightRef} />
-                    <div className="gate_section gate_load" />
+                    {/* <div className="gate_section gate_left" ref={gateLeftRef} />
+                    <div className="gate_section gate_right" ref={gateRightRef} /> */}
                     {teams.map((parent, idx1) => (
                         <div key={idx1} className="list_wrap" id={parent.length + "_t"}>
                             <div className="list_parent">
@@ -183,7 +193,10 @@ const InsertData2 = () => {
                         </div>
                     ))}
                 </div>
-                <div className="btn_section">
+                <div className="info_section">
+                    
+                </div>
+                <div className="btn_section" ref={btnSecRef}>
                     <Style.FadeUp $timing={0} $team={teams.length}>
                         <Style.BtnStyle onClick={() => onClickRandom()}>무작위</Style.BtnStyle>
                     </Style.FadeUp>

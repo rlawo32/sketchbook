@@ -2,26 +2,11 @@
 
 import * as Style from "./match_player.style";
 
-import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+const MatchPlayer = () => {
 
-import TopIcon from "../icons/TopIcon";
-import JugIcon from "../icons/JugIcon";
-import MidIcon from "../icons/MidIcon";
-import AdcIcon from "../icons/AdcIcon";
-import SupIcon from "../icons/SupIcon";
-import MvpIcon from "../icons/MvpIcon";
-import MultikillIcon from "../icons/MultikillIcon";
-
-const MatchPlayer = (props:{directPlayer:string|null}) => {
-    const matchListRef:any = useRef<any>([]);
-    const matchHistoryRef:any = useRef<any>([]);
-    const selectRef:any = useRef<any>([]);
-
-    let imageMainUrl:string = "";
-    let imageSubUrl:string = "";
-    let imageExtension:string = "";
-    let lastUpdate:string = "";
+    const laneArr:string[] = ["ALL", "TOP", "JUG", "MID", "ADC", "SUP"];
+    const resultArr:string[] = ["TEST1", "TEST2", "TEST3"];
+    const selectOption:string = "A"; // 기본(All) - A, 상대(Opponent) - O, 라인(Lane) - L, 상대&라인(Merge) - M
 
     return (
         <Style.MatchPlayer>
@@ -32,8 +17,11 @@ const MatchPlayer = (props:{directPlayer:string|null}) => {
                     </Style.MatchPlayerBox>
                 </div>
                 <div className="player_info">
-                    <div>
+                    <div className="info_left">
                         
+                    </div>
+                    <div className="info_right">
+
                     </div>
                 </div>
             </Style.MatchPlayerHeader>
@@ -48,7 +36,64 @@ const MatchPlayer = (props:{directPlayer:string|null}) => {
 
                     </Style.MatchPlayerHistory>
                     <Style.MatchPlayerRelative>
-                        
+                        <div className="relative_head">
+                            <div className="relative_select_lane">
+                                {laneArr.map((item) => {
+                                    return (
+                                        <Style.RelativeSelectLaneBox>
+                                            {item}
+                                        </Style.RelativeSelectLaneBox>
+                                    )
+                                })}
+                            </div>
+                            <div className="relative_select_player">
+                                <select>
+                                    <option>성재</option>
+                                    <option>지훈</option>
+                                    <option>광호</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="relative_body">
+                            {     // 상대 선택
+                                selectOption === 'O' ?  
+                                    resultArr.map((item) => {
+                                        return (
+                                            <Style.RelativeListBox $type={"O"}>
+
+                                            </Style.RelativeListBox>
+                                        )
+                                    })
+                                : // 라인 선택
+                                selectOption === 'L' ?  
+                                    resultArr.map((item) => {
+                                        return (
+                                            <Style.RelativeListBox $type={"L"}>
+
+                                            </Style.RelativeListBox>
+                                        )
+                                    }) 
+                                : // 상대&라인 선택
+                                selectOption === 'M' ?  
+                                    <div>
+                                        <Style.RelativeListCard $type={"M"}>
+
+                                        </Style.RelativeListCard>
+                                        <div>VS</div>
+                                        <Style.RelativeListCard $type={"M"}>
+
+                                        </Style.RelativeListCard>
+                                    </div> 
+                                : // 기본                  
+                                    resultArr.map((item) => {
+                                        return (
+                                            <Style.RelativeListBox $type={"A"}>
+
+                                            </Style.RelativeListBox>
+                                        )
+                                    })
+                            }
+                        </div>
                     </Style.MatchPlayerRelative>
                     <Style.MatchPlayerChampion>
                         
